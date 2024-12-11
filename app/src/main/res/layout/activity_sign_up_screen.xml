@@ -9,11 +9,12 @@
 
     <!-- Username Field -->
     <EditText
-        android:id="@+id/username_box_sing_up_screen"
+        android:id="@+id/SignUpScreen_txt_user"
         android:layout_width="310dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:autofillHints=""
         android:ems="10"
-        android:hint="Username"
+        android:hint="@string/username"
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,11 +25,12 @@
 
     <!-- Select password Field -->
     <EditText
-        android:id="@+id/password_box_sing_up_screen"
+        android:id="@+id/SignUpScreen_txt_password"
         android:layout_width="310dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:autofillHints=""
         android:ems="10"
-        android:hint="Select a password"
+        android:hint="@string/select_a_password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,11 +41,12 @@
 
     <!-- Confirm password Field -->
     <EditText
-        android:id="@+id/confirmPassword_box_sing_up_screen"
+        android:id="@+id/SignUpScreen_txt_confirmPassword"
         android:layout_width="310dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:autofillHints=""
         android:ems="10"
-        android:hint="Confirm password"
+        android:hint="@string/confirm_password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,10 +57,10 @@
 
     <!-- Create account Button -->
     <Button
-        android:id="@+id/createAcc_btn_sing_up_screen"
+        android:id="@+id/SignUpScreen_btn_createAccount"
         android:layout_width="310dp"
         android:layout_height="wrap_content"
-        android:text="Create account"
+        android:text="@string/create_account"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -67,19 +70,22 @@
 
     <!-- Login Text -->
     <TextView
-        android:id="@+id/login_txt_sing_up_screen"
+        android:id="@+id/SignUpScreen_txt_logInText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Already have account? Login"
-        tools:layout_editor_absoluteX="112dp"
-        tools:layout_editor_absoluteY="526dp" />
+        android:text="@string/already_have_account_login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.744" />
 
     <!-- Register Text -->
     <TextView
-        android:id="@+id/register_txt_sing_up_screen"
+        android:id="@+id/SignUpScreen_txt_registerText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register"
+        android:text="@string/register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
