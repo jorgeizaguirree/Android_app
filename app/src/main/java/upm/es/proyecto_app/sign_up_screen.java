@@ -2,9 +2,9 @@ package upm.es.proyecto_app;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -24,6 +24,7 @@ public class sign_up_screen extends AppCompatActivity {
 
     Button createButton;
     EditText user, password, repeat;
+    TextView logInText;
     int CORRECT = 1, PASS_WRONG = 2, USER_NOT_FOUND = 3;
     LoadLogInDetails load = new LoadLogInDetails();
 
@@ -41,6 +42,7 @@ public class sign_up_screen extends AppCompatActivity {
         user = findViewById(R.id.SignUpScreen_txt_user);
         password = findViewById(R.id.SignUpScreen_txt_password);
         repeat = findViewById(R.id.SignUpScreen_txt_confirmPassword);
+        logInText = findViewById(R.id.SignUpScreen_txt_logInText);
 
         File internalStorageDir = getFilesDir();
         File myFile = new File(internalStorageDir, "db.txt");
@@ -53,35 +55,34 @@ public class sign_up_screen extends AppCompatActivity {
             Toast.makeText(sign_up_screen.this, "Error reading database", Toast.LENGTH_SHORT).show();
         }
 
-        createButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (user.getText().toString().isEmpty()) {
-                    user.setError("Please enter a username");
-                } else if (password.getText().toString().isEmpty()) {
-                    password.setError("Please enter a password");
-                } else if (repeat.getText().toString().isEmpty()) {
-                    repeat.setError("Please repeat the password");
-                } else if (!password.getText().toString().equals(repeat.getText().toString())) {
-                    repeat.setError("Passwords do not match");
-                } else {
-                    int result = load.findUser(user.getText().toString(), "");
-                    if (result == USER_NOT_FOUND){
-                        try{
-                            FileOutputStream fos = new FileOutputStream(myFile, true);
-                            String line = user.getText().toString() + ";" + password.getText().toString().hashCode() + "\n";
-                            fos.write(line.getBytes());
-                            Toast.makeText(sign_up_screen.this, "Account created", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(sign_up_screen.this, LogInScreen.class));
-                        } catch (IOException e) {
-                            Toast.makeText(sign_up_screen.this, "Error writing database", Toast.LENGTH_SHORT).show();
-                        }
-                    } else {
-                        user.setError("Username already exists");
+        createButton.setOnClickListener(view -> {
+            if (user.getText().toString().isEmpty()) {
+                user.setError("Please enter a username");
+            } else if (password.getText().toString().isEmpty()) {
+                password.setError("Please enter a password");
+            } else if (repeat.getText().toString().isEmpty()) {
+                repeat.setError("Please repeat the password");
+            } else if (!password.getText().toString().equals(repeat.getText().toString())) {
+                repeat.setError("Passwords do not match");
+            } else {
+                int result = load.findUser(user.getText().toString(), "");
+                if (result == USER_NOT_FOUND){
+                    try{
+                        FileOutputStream fos = new FileOutputStream(myFile, true);
+                        String line = user.getText().toString() + ";" + password.getText().toString().hashCode() + "\n";
+                        fos.write(line.getBytes());
+                        Toast.makeText(sign_up_screen.this, "Account created", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(sign_up_screen.this, LogInScreen.class));
+                    } catch (IOException e) {
+                        Toast.makeText(sign_up_screen.this, "Error writing database", Toast.LENGTH_SHORT).show();
                     }
+                } else {
+                    user.setError("Username already exists");
                 }
             }
         });
+
+        logInText.setOnClickListener(view -> startActivity(new Intent(sign_up_screen.this, LogInScreen.class)));
 
     }
 }
