@@ -9,7 +9,7 @@
 
     <!-- Username Field -->
     <EditText
-        android:id="@+id/LogInScreen_txt_user"
+        android:id="@+id/logInScreen_txt_user"
         android:layout_width="310dp"
         android:layout_height="50dp"
         android:ems="10"

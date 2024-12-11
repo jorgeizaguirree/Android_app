@@ -22,7 +22,7 @@ import java.io.InputStreamReader;
 
 public class sign_up_screen extends AppCompatActivity {
 
-    Button createButton, returnButton;
+    Button createButton;
     EditText user, password, repeat;
     int CORRECT = 1, PASS_WRONG = 2, USER_NOT_FOUND = 3;
     LoadLogInDetails load = new LoadLogInDetails();
@@ -37,11 +37,10 @@ public class sign_up_screen extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        createButton = findViewById(R.id.createAcc_btn_sing_up_screen);
-        returnButton = findViewById(R.id.signUpScreen_btn_return);
-        user = findViewById(R.id.username_box_sing_up_screen);
-        password = findViewById(R.id.pass_box_sing_up_screen);
-        repeat = findViewById(R.id.confirmPass_box_sing_up_screen);
+        createButton = findViewById(R.id.SignUpScreen_btn_createAccount);
+        user = findViewById(R.id.SignUpScreen_txt_user);
+        password = findViewById(R.id.SignUpScreen_txt_password);
+        repeat = findViewById(R.id.SignUpScreen_txt_confirmPassword);
 
         File internalStorageDir = getFilesDir();
         File myFile = new File(internalStorageDir, "db.txt");
@@ -81,14 +80,8 @@ public class sign_up_screen extends AppCompatActivity {
                         user.setError("Username already exists");
                     }
                 }
+            }
+        });
 
-            }
-        });
-        returnButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(sign_up_screen.this, LogInScreen.class));
-            }
-        });
     }
 }
