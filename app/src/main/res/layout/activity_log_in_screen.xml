@@ -24,7 +24,7 @@
 
     <!-- Password Field -->
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/logInScreen_txt_password"
         android:layout_width="310dp"
         android:layout_height="50dp"
         android:ems="10"
@@ -51,8 +51,21 @@
         app:layout_constraintVertical_bias="0.653" />
 
     <!-- Sing Up Text -->
+
+    <Button
+        android:id="@+id/logInScreen_btn_eraseData"
+        android:layout_width="107dp"
+        android:layout_height="55dp"
+        android:text="Erase all data"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/logInScreen_txt_signUpText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Don't have an account? Sing Up"
@@ -65,7 +78,7 @@
 
     <!-- Welcome Text -->
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/logInScreen_txt_welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Welcome Back"

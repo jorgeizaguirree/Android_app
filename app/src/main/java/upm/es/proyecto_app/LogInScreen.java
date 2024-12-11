@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -22,8 +23,9 @@ import java.io.InputStreamReader;
 
 public class LogInScreen extends AppCompatActivity {
 
-    Button logInButton, signUpButton, eraseButton;
+    Button logInButton, eraseButton;
     EditText user, password;
+    TextView signUpText;
     int CORRECT = 1, PASS_WRONG = 2, USER_NOT_FOUND = 3;
     LoadLogInDetails load;
 
@@ -31,7 +33,7 @@ public class LogInScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome_screen);
+        setContentView(R.layout.activity_log_in_screen);
         EdgeToEdge.enable(this);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -39,10 +41,12 @@ public class LogInScreen extends AppCompatActivity {
             return insets;
         });
         logInButton = findViewById(R.id.logInScreen_btn_logIN);
-        signUpButton = findViewById(R.id.logInScreen_btn_signUP);
-        eraseButton = findViewById(R.id.logInScreen_btn_erase_data);
+        signUpText = findViewById(R.id.logInScreen_txt_signUpText);
+        eraseButton = findViewById(R.id.logInScreen_btn_eraseData);
         user = findViewById(R.id.logInScreen_txt_user);
-        password = findViewById(R.id.editTextTextPassword);
+        password = findViewById(R.id.logInScreen_txt_password);
+
+
         load = new LoadLogInDetails();
 
         File internalStorageDir = getFilesDir();
@@ -76,13 +80,13 @@ public class LogInScreen extends AppCompatActivity {
                 } else if (result == USER_NOT_FOUND) {
                     user.setError("User not found");
                     password.setText("");
-                } else {
+                } else if (result == PASS_WRONG){
                     password.setError("Wrong password");
                     password.setText("");
                 }
             }
         });
-        signUpButton.setOnClickListener(view -> {
+        signUpText.setOnClickListener(view -> {
             Intent intent = new Intent(LogInScreen.this, sign_up_screen.class);
             intent.putExtra("user", user.getText().toString());
             startActivity(intent);

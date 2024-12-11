@@ -17,20 +17,7 @@ import java.net.URL;
 
 public class home_screen extends AppCompatActivity {
 
-    public BufferedReader get_url(String url_string){
-        try {
-            URL url = new URL(url_string);
-            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-            Toast.makeText(home_screen.this, conn.getResponseCode() + "", Toast.LENGTH_SHORT).show();
-            Toast.makeText(home_screen.this, conn.getResponseMessage(), Toast.LENGTH_SHORT).show();
-            InputStream is = conn.getInputStream();
-            return new BufferedReader(new InputStreamReader(is));
-        }
-        catch (Exception e) {
-            Toast.makeText(home_screen.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-        return null;
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
