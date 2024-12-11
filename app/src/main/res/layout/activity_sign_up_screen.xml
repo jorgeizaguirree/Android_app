@@ -7,71 +7,84 @@
     android:layout_height="match_parent"
     tools:context=".sign_up_screen">
 
-    <Button
-        android:id="@+id/SignUpScreen_btn_create"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Create account"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.774"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.513" />
-
-    <Button
-        android:id="@+id/signUpScreen_btn_return"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Go back"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.187"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.512" />
-
+    <!-- Username Field -->
     <EditText
-        android:id="@+id/SignUpScreen_txt_user"
-        android:layout_width="wrap_content"
+        android:id="@+id/username_box_sing_up_screen"
+        android:layout_width="310dp"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Username"
         android:inputType="text"
-        android:hint="New username"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintVertical_bias="0.373" />
 
+    <!-- Select password Field -->
     <EditText
-        android:id="@+id/SignUpScreen_txt_password"
-        android:layout_width="wrap_content"
+        android:id="@+id/password_box_sing_up_screen"
+        android:layout_width="310dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Select a password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.295" />
+        app:layout_constraintVertical_bias="0.463" />
 
+    <!-- Confirm password Field -->
     <EditText
-        android:id="@+id/SignUpScreen_txt_repeat"
-        android:layout_width="wrap_content"
+        android:id="@+id/confirmPassword_box_sing_up_screen"
+        android:layout_width="310dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="repeat password"
+        android:hint="Confirm password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.389" />
+        app:layout_constraintVertical_bias="0.556" />
 
+    <!-- Create account Button -->
+    <Button
+        android:id="@+id/createAcc_btn_sing_up_screen"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:text="Create account"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.654" />
+
+    <!-- Login Text -->
+    <TextView
+        android:id="@+id/login_txt_sing_up_screen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Already have account? Login"
+        tools:layout_editor_absoluteX="112dp"
+        tools:layout_editor_absoluteY="526dp" />
+
+    <!-- Register Text -->
+    <TextView
+        android:id="@+id/register_txt_sing_up_screen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.235" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
