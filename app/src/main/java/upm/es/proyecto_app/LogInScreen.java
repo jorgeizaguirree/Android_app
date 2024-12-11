@@ -52,6 +52,7 @@ public class LogInScreen extends AppCompatActivity {
         File internalStorageDir = getFilesDir();
         File myFile = new File(internalStorageDir, "db.txt");
         try {
+            //noinspection ResultOfMethodCallIgnored
             myFile.createNewFile();
             FileInputStream fis = new FileInputStream(myFile);
             InputStreamReader isr = new InputStreamReader(fis);
