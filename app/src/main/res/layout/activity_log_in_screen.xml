@@ -5,58 +5,70 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LogInScreen">
+    android:background="@drawable/dark_gray_gradient"
+    tools:context=".logInScreen">
 
-    <!-- Username Field -->
-    <EditText
-        android:id="@+id/logInScreen_txt_user"
-        android:layout_width="310dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:hint="Username"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <View
+        android:id="@+id/logInScreen_view_whiteBackground"
+        android:layout_width="412dp"
+        android:layout_height="596dp"
+        android:layout_marginTop="348dp"
+        android:background="@drawable/white_rounded_background"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.446" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Password Field -->
-    <EditText
-        android:id="@+id/logInScreen_txt_password"
-        android:layout_width="310dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/logInScreen_image_canvaLogo"
+        android:layout_width="259dp"
+        android:layout_height="204dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="192dp"
+        android:layout_marginBottom="75dp"
+        android:contentDescription="@string/canva_logo"
+        app:layout_constraintBottom_toTopOf="@+id/logInScreen_view_whiteBackground"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.546" />
+        app:layout_constraintVertical_bias="0.451"
+        app:srcCompat="@mipmap/canva_logo_image" />
 
-    <!-- Login Button -->
-    <Button
-        android:id="@+id/logInScreen_btn_logIN"
-        android:layout_width="310dp"
+    <TextView
+        android:id="@+id/logInScreen_txt_appName"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/app_name"
+        android:textColor="@android:color/white"
+        android:textSize="45sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/logInScreen_view_whiteBackground"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.688"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.653" />
+        app:layout_constraintVertical_bias="0.472" />
 
-    <!-- Sing Up Text -->
+    <TextView
+        android:id="@+id/logInScreen_txt_slogan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="@string/slogan"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/logInScreen_view_whiteBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.873"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.597" />
 
     <Button
         android:id="@+id/logInScreen_btn_eraseData"
         android:layout_width="107dp"
         android:layout_height="55dp"
-        android:text="Erase all data"
+        android:text="@string/erase_all_data"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -64,29 +76,120 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
+    <EditText
+        android:id="@+id/logInScreen_txt_username"
+        android:layout_width="308dp"
+        android:layout_height="60dp"
+        android:autofillHints=""
+        android:background="@drawable/edit_text_background"
+        android:ems="10"
+        android:fontFamily="@font/montserrat_regular"
+        android:gravity="center_vertical"
+        android:hint="@string/username"
+        android:textSize="16sp"
+        android:inputType="text"
+        android:paddingStart="65dp"
+        android:paddingEnd="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.572" />
+
+    <ImageView
+        android:id="@+id/logInScreen_image_lockIcon"
+        android:layout_width="44dp"
+        android:layout_height="45dp"
+        android:contentDescription="@string/lock_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/logInScreen_txt_password"
+        app:layout_constraintEnd_toEndOf="@+id/logInScreen_txt_password"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="@+id/logInScreen_txt_password"
+        app:layout_constraintTop_toTopOf="@+id/logInScreen_txt_password"
+        app:layout_constraintVertical_bias="0.466"
+        app:srcCompat="@drawable/ic_lock" />
+
+    <ImageView
+        android:id="@+id/logInScreen_image_userIcon"
+        android:layout_width="44dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="1dp"
+        android:contentDescription="@string/user_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/logInScreen_txt_username"
+        app:layout_constraintEnd_toEndOf="@+id/logInScreen_txt_username"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="@+id/logInScreen_txt_username"
+        app:layout_constraintTop_toTopOf="@+id/logInScreen_txt_username"
+        app:layout_constraintVertical_bias="0.466"
+        app:srcCompat="@drawable/ic_user" />
+
+    <Button
+        android:id="@+id/logInScreen_btn_signIn"
+        android:layout_width="308dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/btn_light_gray_gradient"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="@string/sign_in"
+        android:textSize="15sp"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toTopOf="@+id/logInScreen_txt_signUpText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logInScreen_checkBox"
+        app:layout_constraintVertical_bias="0.105" />
+
     <TextView
         android:id="@+id/logInScreen_txt_signUpText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Don't have an account? Sing Up"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="@string/dont_have_an_account_txt"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.73" />
+        app:layout_constraintVertical_bias="0.881" />
 
-    <!-- Welcome Text -->
-    <TextView
-        android:id="@+id/logInScreen_txt_welcome"
+    <CheckBox
+        android:id="@+id/logInScreen_checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome Back"
+        android:layout_marginBottom="208dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="@string/remember_me"
+        android:textColor="@color/gray"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.265"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logInScreen_txt_password"
+        app:layout_constraintVertical_bias="0.909" />
+
+    <EditText
+        android:id="@+id/logInScreen_txt_password"
+        android:layout_width="308dp"
+        android:layout_height="60dp"
+        android:autofillHints=""
+        android:background="@drawable/edit_text_background"
+        android:ems="10"
+        android:fontFamily="@font/montserrat_regular"
+        android:gravity="center_vertical"
+        android:hint="@string/password"
+        android:textSize="16sp"
+        android:inputType="textPassword"
+        android:paddingStart="65dp"
+        android:paddingEnd="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.271" />
+        app:layout_constraintVertical_bias="0.661" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

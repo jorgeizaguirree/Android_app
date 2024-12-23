@@ -5,92 +5,198 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".sign_up_screen">
+    android:background="@drawable/dark_gray_gradient"
+    tools:context=".signUpScreen"
+    tools:layout_editor_absoluteX="-7dp"
+    tools:layout_editor_absoluteY="0dp">
 
-    <!-- Username Field -->
-    <EditText
-        android:id="@+id/SignUpScreen_txt_user"
-        android:layout_width="310dp"
-        android:layout_height="50dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/username"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <View
+        android:id="@+id/signUpScreen_view_whiteBackground"
+        android:layout_width="411dp"
+        android:layout_height="700dp"
+        android:layout_marginTop="320dp"
+        android:background="@drawable/white_rounded_background"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/signUpScreen_image_canvaLogo"
+        android:layout_width="259dp"
+        android:layout_height="204dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="192dp"
+        android:layout_marginBottom="75dp"
+        android:contentDescription="@string/canva_logo"
+        app:layout_constraintBottom_toTopOf="@+id/signUpScreen_view_whiteBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.451"
+        app:srcCompat="@mipmap/canva_logo_image" />
+
+    <TextView
+        android:id="@+id/signUpScreen_txt_appName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/app_name"
+        android:textColor="@android:color/white"
+        android:textSize="45sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/signUpScreen_view_whiteBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.688"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.373" />
+        app:layout_constraintVertical_bias="0.472" />
 
-    <!-- Select password Field -->
-    <EditText
-        android:id="@+id/SignUpScreen_txt_password"
-        android:layout_width="310dp"
-        android:layout_height="50dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/select_a_password"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+        android:id="@+id/signUpScreen_txt_slogan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="@string/slogan"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/signUpScreen_view_whiteBackground"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.873"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.463" />
+        app:layout_constraintVertical_bias="0.597" />
 
-    <!-- Confirm password Field -->
-    <EditText
-        android:id="@+id/SignUpScreen_txt_confirmPassword"
-        android:layout_width="310dp"
-        android:layout_height="50dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/confirm_password"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.556" />
-
-    <!-- Create account Button -->
     <Button
-        android:id="@+id/SignUpScreen_btn_createAccount"
-        android:layout_width="310dp"
-        android:layout_height="wrap_content"
-        android:text="@string/create_account"
+        android:id="@+id/signUpScreen_btn_signUp"
+        android:layout_width="308dp"
+        android:layout_height="60dp"
+        android:background="@drawable/btn_light_gray_gradient"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="@string/sign_up"
+        android:textSize="15sp"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.654" />
+        app:layout_constraintTop_toBottomOf="@+id/signUpScreen_txt_confirmPassword"
+        app:layout_constraintVertical_bias="0.201" />
 
-    <!-- Login Text -->
-    <TextView
-        android:id="@+id/SignUpScreen_txt_logInText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/already_have_account_login"
+    <EditText
+        android:id="@+id/signUpScreen_txt_username"
+        android:layout_width="308dp"
+        android:layout_height="60dp"
+        android:autofillHints=""
+        android:background="@drawable/edit_text_background"
+        android:ems="10"
+        android:gravity="center_vertical"
+        android:hint="@string/username"
+        android:textSize="16sp"
+        android:fontFamily="@font/montserrat_regular"
+        android:inputType="text"
+        android:paddingStart="65dp"
+        android:paddingEnd="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.744" />
+        app:layout_constraintVertical_bias="0.525" />
 
-    <!-- Register Text -->
-    <TextView
-        android:id="@+id/SignUpScreen_txt_registerText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/register"
+    <ImageView
+        android:id="@+id/signUpScreen_image_userIcon"
+        android:layout_width="44dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="1dp"
+        android:contentDescription="@string/user_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/signUpScreen_txt_username"
+        app:layout_constraintEnd_toEndOf="@+id/signUpScreen_txt_username"
+        app:layout_constraintHorizontal_bias="0.061"
+        app:layout_constraintStart_toStartOf="@+id/signUpScreen_txt_username"
+        app:layout_constraintTop_toTopOf="@+id/signUpScreen_txt_username"
+        app:layout_constraintVertical_bias="0.466"
+        app:srcCompat="@drawable/ic_user" />
+
+    <ImageView
+        android:id="@+id/signUpScreen_image_lockIcon2"
+        android:layout_width="44dp"
+        android:layout_height="45dp"
+        android:contentDescription="@string/lock_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/signUpScreen_txt_confirmPassword"
+        app:layout_constraintEnd_toEndOf="@+id/signUpScreen_txt_confirmPassword"
+        app:layout_constraintHorizontal_bias="0.061"
+        app:layout_constraintStart_toStartOf="@+id/signUpScreen_txt_confirmPassword"
+        app:layout_constraintTop_toTopOf="@+id/signUpScreen_txt_confirmPassword"
+        app:layout_constraintVertical_bias="0.6"
+        app:srcCompat="@drawable/ic_lock" />
+
+    <ImageView
+        android:id="@+id/signUpScreen_image_lockIcon1"
+        android:layout_width="44dp"
+        android:layout_height="45dp"
+        android:contentDescription="@string/lock_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/signUpScreen_txt_password"
+        app:layout_constraintEnd_toEndOf="@+id/signUpScreen_txt_password"
+        app:layout_constraintHorizontal_bias="0.061"
+        app:layout_constraintStart_toStartOf="@+id/signUpScreen_txt_password"
+        app:layout_constraintTop_toTopOf="@+id/signUpScreen_txt_password"
+        app:layout_constraintVertical_bias="0.533"
+        app:srcCompat="@drawable/ic_lock" />
+
+    <EditText
+        android:id="@+id/signUpScreen_txt_confirmPassword"
+        android:layout_width="308dp"
+        android:layout_height="60dp"
+        android:autofillHints=""
+        android:background="@drawable/edit_text_background"
+        android:ems="10"
+        android:gravity="center_vertical"
+        android:hint="@string/confirm_password"
+        android:textSize="16sp"
+        android:fontFamily="@font/montserrat_regular"
+        android:inputType="textPassword"
+        android:paddingStart="65dp"
+        android:paddingEnd="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.235" />
+        app:layout_constraintVertical_bias="0.709" />
+
+    <TextView
+        android:id="@+id/signUpScreen_txt_signInText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="@string/already_have_account_txt"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.883" />
+
+    <EditText
+        android:id="@+id/signUpScreen_txt_password"
+        android:layout_width="308dp"
+        android:layout_height="60dp"
+        android:autofillHints=""
+        android:background="@drawable/edit_text_background"
+        android:ems="10"
+        android:gravity="center_vertical"
+        android:hint="@string/select_password"
+        android:textSize="16sp"
+        android:fontFamily="@font/montserrat_regular"
+        android:inputType="textPassword"
+        android:paddingStart="65dp"
+        android:paddingEnd="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.617" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

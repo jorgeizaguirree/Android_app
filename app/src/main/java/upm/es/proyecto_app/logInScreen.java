@@ -20,15 +20,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-
-public class LogInScreen extends AppCompatActivity {
+public class logInScreen extends AppCompatActivity {
 
     Button logInButton, eraseButton;
     EditText user, password;
     TextView signUpText;
     int CORRECT = 1, PASS_WRONG = 2, USER_NOT_FOUND = 3;
     LoadLogInDetails load;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +38,12 @@ public class LogInScreen extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        logInButton = findViewById(R.id.logInScreen_btn_logIN);
+
+        logInButton = findViewById(R.id.logInScreen_btn_signIn);
         signUpText = findViewById(R.id.logInScreen_txt_signUpText);
         eraseButton = findViewById(R.id.logInScreen_btn_eraseData);
-        user = findViewById(R.id.logInScreen_txt_user);
+        user = findViewById(R.id.logInScreen_txt_username);
         password = findViewById(R.id.logInScreen_txt_password);
-
 
         load = new LoadLogInDetails();
 
@@ -58,9 +56,9 @@ public class LogInScreen extends AppCompatActivity {
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             load = new LoadLogInDetails(br);
-            Toast.makeText(LogInScreen.this, "Database loaded", Toast.LENGTH_SHORT).show();
+            Toast.makeText(logInScreen.this, "Database loaded", Toast.LENGTH_SHORT).show();
         } catch (IOException e){
-            Toast.makeText(LogInScreen.this, "Error reading database", Toast.LENGTH_SHORT).show();
+            Toast.makeText(logInScreen.this, "Error reading database", Toast.LENGTH_SHORT).show();
         }
 
         logInButton.setOnClickListener(view -> {
@@ -72,10 +70,10 @@ public class LogInScreen extends AppCompatActivity {
                 password.setError("Please enter a password");
             }
             if (!user.getText().toString().isEmpty() && !password.getText().toString().isEmpty()) {
-                Toast.makeText(LogInScreen.this, "Loading...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(logInScreen.this, "Loading...", Toast.LENGTH_SHORT).show();
                 int result = load.findUser(user.getText().toString(), password.getText().toString());
                 if (result == CORRECT) {
-                    Intent intent = new Intent(LogInScreen.this, home_screen.class);
+                    Intent intent = new Intent(logInScreen.this, home_screen.class);
                     intent.putExtra("user", user.getText().toString());
                     startActivity(intent);
                 } else if (result == USER_NOT_FOUND) {
@@ -88,7 +86,7 @@ public class LogInScreen extends AppCompatActivity {
             }
         });
         signUpText.setOnClickListener(view -> {
-            Intent intent = new Intent(LogInScreen.this, sign_up_screen.class);
+            Intent intent = new Intent(logInScreen.this, signUpScreen.class);
             intent.putExtra("user", user.getText().toString());
             startActivity(intent);
         });
@@ -96,12 +94,10 @@ public class LogInScreen extends AppCompatActivity {
             try{
                 FileOutputStream fos = new FileOutputStream(myFile);
                 fos.write("".getBytes());
-                Toast.makeText(LogInScreen.this, "Database erased", Toast.LENGTH_SHORT).show();
+                Toast.makeText(logInScreen.this, "Database erased", Toast.LENGTH_SHORT).show();
             } catch (IOException e) {
-                Toast.makeText(LogInScreen.this, "Error deleting database", Toast.LENGTH_SHORT).show();
+                Toast.makeText(logInScreen.this, "Error deleting database", Toast.LENGTH_SHORT).show();
             }
         });
-
-
     }
 }

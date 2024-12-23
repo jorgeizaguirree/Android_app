@@ -11,7 +11,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class Welcome_activity extends AppCompatActivity {
+public class welcomeScreen extends AppCompatActivity {
     Button LogInBtn, SignUPBtn;
 
     @Override
@@ -25,19 +25,18 @@ public class Welcome_activity extends AppCompatActivity {
             return insets;
         });
 
-
-        LogInBtn = findViewById(R.id.logInScreen_btn_logIN);
-        SignUPBtn = findViewById(R.id.logInScreen_btn_signUP);
+        LogInBtn = findViewById(R.id.welcomeScreen_btn_login);
+        SignUPBtn = findViewById(R.id.welcomeScreen_btn_createAccount);
         LogInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Welcome_activity.this, LogInScreen.class));
+                startActivity(new Intent(welcomeScreen.this, logInScreen.class));
             }
         });
         SignUPBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Welcome_activity.this, sign_up_screen.class));
+                startActivity(new Intent(welcomeScreen.this, signUpScreen.class));
             }
         });
     }

@@ -2,4 +2,13 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gray">#545454</color>
+
+    <!-- Colors for the dark gray gradient -->
+    <color name="black_darkGradient">#1E1D1D</color>
+    <color name="gray_darkGradient">#737373</color>
+
+    <!-- Colors for the light gray gradient -->
+    <color name="darkGray_lightGradient">#616161</color>
+    <color name="lightGray_lightGradient">#B8B8B8</color>
 </resources>

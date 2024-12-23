@@ -12,27 +12,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Proyecto_app"
         tools:targetApi="31">
+
         <!-- LogInScreen -->
         <activity
-            android:name=".LogInScreen"
+            android:name=".logInScreen"
             android:exported="false" />
 
         <!-- WelcomeScreen -->
         <activity
-            android:name=".Welcome_activity"
+            android:name=".welcomeScreen"
+            android:theme="@style/SplashTheme"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- Sign Up Screen -->
+        </activity>
+
+        <!-- Sign Up Screen -->
         <activity
-            android:name=".sign_up_screen"
-            android:exported="false" /> <!-- Home Screen -->
+            android:name=".signUpScreen"
+            android:exported="false" />
+
+        <!-- Home Screen -->
         <activity
             android:name=".home_screen"
             android:exported="false" />
     </application>
-
 </manifest>

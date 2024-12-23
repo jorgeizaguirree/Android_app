@@ -20,7 +20,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class sign_up_screen extends AppCompatActivity {
+public class signUpScreen extends AppCompatActivity {
 
     Button createButton;
     EditText user, password, repeat;
@@ -38,11 +38,12 @@ public class sign_up_screen extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        createButton = findViewById(R.id.SignUpScreen_btn_createAccount);
-        user = findViewById(R.id.SignUpScreen_txt_user);
-        password = findViewById(R.id.SignUpScreen_txt_password);
-        repeat = findViewById(R.id.SignUpScreen_txt_confirmPassword);
-        logInText = findViewById(R.id.SignUpScreen_txt_logInText);
+
+        createButton = findViewById(R.id.signUpScreen_btn_signUp);
+        user = findViewById(R.id.signUpScreen_txt_username);
+        password = findViewById(R.id.signUpScreen_txt_password);
+        repeat = findViewById(R.id.signUpScreen_txt_confirmPassword);
+        logInText = findViewById(R.id.signUpScreen_txt_signInText);
 
         File internalStorageDir = getFilesDir();
         File myFile = new File(internalStorageDir, "db.txt");
@@ -52,7 +53,7 @@ public class sign_up_screen extends AppCompatActivity {
             BufferedReader br = new BufferedReader(isr);
             load = new LoadLogInDetails(br);
         } catch (IOException e){
-            Toast.makeText(sign_up_screen.this, "Error reading database", Toast.LENGTH_SHORT).show();
+            Toast.makeText(signUpScreen.this, "Error reading database", Toast.LENGTH_SHORT).show();
         }
 
         createButton.setOnClickListener(view -> {
@@ -71,18 +72,16 @@ public class sign_up_screen extends AppCompatActivity {
                         FileOutputStream fos = new FileOutputStream(myFile, true);
                         String line = user.getText().toString() + ";" + password.getText().toString().hashCode() + "\n";
                         fos.write(line.getBytes());
-                        Toast.makeText(sign_up_screen.this, "Account created", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(sign_up_screen.this, LogInScreen.class));
+                        Toast.makeText(signUpScreen.this, "Account created", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(signUpScreen.this, logInScreen.class));
                     } catch (IOException e) {
-                        Toast.makeText(sign_up_screen.this, "Error writing database", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(signUpScreen.this, "Error writing database", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     user.setError("Username already exists");
                 }
             }
         });
-
-        logInText.setOnClickListener(view -> startActivity(new Intent(sign_up_screen.this, LogInScreen.class)));
-
+        logInText.setOnClickListener(view -> startActivity(new Intent(signUpScreen.this, logInScreen.class)));
     }
 }
