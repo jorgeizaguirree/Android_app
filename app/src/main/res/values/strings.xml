@@ -17,4 +17,8 @@
     <string name="lock_icon">Lock Icon</string>
     <string name="user_icon">User Icon</string>
     <string name="remember_me">Remember me</string>
+    <string name="we_glad_to_see_you_back">We glad to see you back</string>
+    <string name="hello_user">Hello, User!</string>
+    <string name="default_user_icon">default user icon</string>
+    <string name="see_details">See details</string>
 </resources>
