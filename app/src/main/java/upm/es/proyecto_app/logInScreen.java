@@ -3,6 +3,7 @@ package upm.es.proyecto_app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +26,7 @@ public class logInScreen extends AppCompatActivity {
     Button logInButton, eraseButton;
     EditText user, password;
     TextView signUpText;
+    CheckBox rememberMe;
     int CORRECT = 1, PASS_WRONG = 2, USER_NOT_FOUND = 3;
     LoadLogInDetails load;
 
@@ -44,6 +46,7 @@ public class logInScreen extends AppCompatActivity {
         eraseButton = findViewById(R.id.logInScreen_btn_eraseData);
         user = findViewById(R.id.logInScreen_txt_username);
         password = findViewById(R.id.logInScreen_txt_password);
+        rememberMe = findViewById(R.id.logInScreen_checkBox);
 
         load = new LoadLogInDetails();
 
@@ -60,9 +63,7 @@ public class logInScreen extends AppCompatActivity {
         } catch (IOException e){
             Toast.makeText(logInScreen.this, "Error reading database", Toast.LENGTH_SHORT).show();
         }
-
         logInButton.setOnClickListener(view -> {
-
             if (user.getText().toString().isEmpty()) {
                 user.setError("Please enter a username");
             }
@@ -75,6 +76,7 @@ public class logInScreen extends AppCompatActivity {
                 if (result == CORRECT) {
                     Intent intent = new Intent(logInScreen.this, home_screen.class);
                     intent.putExtra("user", user.getText().toString());
+                    intent.putExtra("password", password.getText().toString());
                     startActivity(intent);
                 } else if (result == USER_NOT_FOUND) {
                     user.setError("User not found");
@@ -99,5 +101,8 @@ public class logInScreen extends AppCompatActivity {
                 Toast.makeText(logInScreen.this, "Error deleting database", Toast.LENGTH_SHORT).show();
             }
         });
+
+
+
     }
 }
