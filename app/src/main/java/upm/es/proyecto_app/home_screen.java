@@ -42,7 +42,7 @@ public class home_screen extends AppCompatActivity {
 
         String welcome_text = "Hello, " + getIntent().getStringExtra("user") + "!";
         welcome.setText(welcome_text);
-        description.setText("Welcome to the app!");
+        description.setText("We are glad to see you back!");
 
         url_btn.setOnClickListener(view -> {
             APIconnection api = new APIconnection(this, quotes, quote);
