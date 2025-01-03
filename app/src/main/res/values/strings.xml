@@ -21,4 +21,7 @@
     <string name="hello_user">Hello, User!</string>
     <string name="default_user_icon">default user icon</string>
     <string name="see_details">See details</string>
+    <string name="create_new_quote">Create new quote</string>
+    <string name="menu_dots">menu dots</string>
+    <string name="change_user_icon">change user icon</string>
 </resources>
