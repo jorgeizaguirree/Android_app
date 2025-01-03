@@ -30,6 +30,9 @@ public class logInScreen extends AppCompatActivity {
     int CORRECT = 1, PASS_WRONG = 2, USER_NOT_FOUND = 3;
     LoadLogInDetails load;
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,15 +50,16 @@ public class logInScreen extends AppCompatActivity {
         user = findViewById(R.id.logInScreen_txt_username);
         password = findViewById(R.id.logInScreen_txt_password);
         rememberMe = findViewById(R.id.logInScreen_checkBox);
-
         load = new LoadLogInDetails();
 
+
+
         File internalStorageDir = getFilesDir();
-        File myFile = new File(internalStorageDir, "db.txt");
+        File database = new File(internalStorageDir, "db.txt");
         try {
             //noinspection ResultOfMethodCallIgnored
-            myFile.createNewFile();
-            FileInputStream fis = new FileInputStream(myFile);
+            database.createNewFile();
+            FileInputStream fis = new FileInputStream(database);
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             load = new LoadLogInDetails(br);
@@ -63,6 +67,38 @@ public class logInScreen extends AppCompatActivity {
         } catch (IOException e){
             Toast.makeText(logInScreen.this, "Error reading database", Toast.LENGTH_SHORT).show();
         }
+
+
+        File rememberFile = new File(internalStorageDir, "remember.txt");
+        try{
+            //noinspection ResultOfMethodCallIgnored
+            rememberFile.createNewFile();
+            FileInputStream fis = new FileInputStream(rememberFile);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            String line = br.readLine();
+            if (line != null) {
+                long time = System.currentTimeMillis();
+                String[] parts = line.split(";");
+                long prev_time = Long.parseLong(parts[2]);
+                long week = 604_800_000_000L;
+                if ( time - prev_time < week) {
+                    Intent intent = new Intent(logInScreen.this, home_screen.class);
+                    intent.putExtra("user", parts[0]);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(logInScreen.this, "Session expired", Toast.LENGTH_SHORT).show();
+                    rememberMe.setChecked(false);
+                    try (FileOutputStream fos = new FileOutputStream(rememberFile)) {
+                        fos.write("".getBytes());
+                    }
+                }
+            }
+        }
+        catch (IOException e){
+            Toast.makeText(logInScreen.this, "Error reading database", Toast.LENGTH_SHORT).show();
+        }
+
         logInButton.setOnClickListener(view -> {
             if (user.getText().toString().isEmpty()) {
                 user.setError("Please enter a username");
@@ -71,12 +107,20 @@ public class logInScreen extends AppCompatActivity {
                 password.setError("Please enter a password");
             }
             if (!user.getText().toString().isEmpty() && !password.getText().toString().isEmpty()) {
-                Toast.makeText(logInScreen.this, "Loading...", Toast.LENGTH_SHORT).show();
                 int result = load.findUser(user.getText().toString(), password.getText().toString());
                 if (result == CORRECT) {
+                    if (rememberMe.isChecked()){
+                        try (FileOutputStream fos = new FileOutputStream(rememberFile, true)){
+                            long time = System.currentTimeMillis();
+                            String line = user.getText().toString() + ";" + password.getText().toString().hashCode() +
+                                    ";" + time + "\n";
+                            fos.write(line.getBytes());
+                        } catch (IOException e) {
+                            Toast.makeText(this, "Error remembering user", Toast.LENGTH_SHORT).show();
+                        }
+                    }
                     Intent intent = new Intent(logInScreen.this, home_screen.class);
                     intent.putExtra("user", user.getText().toString());
-                    intent.putExtra("password", password.getText().toString());
                     startActivity(intent);
                 } else if (result == USER_NOT_FOUND) {
                     user.setError("User not found");
@@ -93,8 +137,7 @@ public class logInScreen extends AppCompatActivity {
             startActivity(intent);
         });
         eraseButton.setOnClickListener(view -> {
-            try{
-                FileOutputStream fos = new FileOutputStream(myFile);
+            try(FileOutputStream fos = new FileOutputStream(database)){
                 fos.write("".getBytes());
                 Toast.makeText(logInScreen.this, "Database erased", Toast.LENGTH_SHORT).show();
             } catch (IOException e) {

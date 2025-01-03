@@ -45,6 +45,7 @@ public class home_screen extends AppCompatActivity {
             return insets;
         });
 
+
         Random random = new Random();
         quoteCounter = random.nextInt(10);
         url_btn = findViewById(R.id.homeScreen_btn_createQuote);
@@ -56,11 +57,11 @@ public class home_screen extends AppCompatActivity {
         String welcome_text = "Hello, " + getIntent().getStringExtra("user") + "!";
         welcome.setText(welcome_text);
 
-        url_btn.setOnClickListener(view -> {
-            APIconnection api = new APIconnection(this, quotes, quote);
-            api.start();
-            quote.setText("Loading...");
-        });
+        APIconnection api = new APIconnection(this, quotes, quote);
+        api.start();
+        quote.setText("Loading...");
+
+
 
         galleryLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
