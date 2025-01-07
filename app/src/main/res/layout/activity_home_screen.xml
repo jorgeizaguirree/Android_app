@@ -32,19 +32,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.116"
-        app:srcCompat="@drawable/ic_default_girl" />
-
-    <ImageView
-        android:id="@+id/homeScreen_image_changeIcon"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="60dp"
-        android:contentDescription="@string/change_user_icon"
-        app:layout_constraintEnd_toEndOf="@+id/homeScreen_image_defaultUserIcon"
-        app:layout_constraintHorizontal_bias="0.530"
-        app:layout_constraintStart_toStartOf="@+id/homeScreen_image_defaultUserIcon"
-        app:layout_constraintTop_toTopOf="@+id/homeScreen_image_defaultUserIcon"
-        app:srcCompat="@drawable/ic_upload" />
+        app:srcCompat="@drawable/ic_default_boy" />
 
     <TextView
         android:id="@+id/homeScreen_txt_username"
@@ -65,14 +53,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/mont_light"
-        android:text="@string/we_glad_to_see_you_back"
-        android:textSize="18sp"
+        android:text="@string/we_are_glad_to_see_you_back"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/homeScreen_view_quoteBackground"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.31"
+        app:layout_constraintHorizontal_bias="0.215"
         app:layout_constraintStart_toEndOf="@+id/homeScreen_image_defaultUserIcon"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.717" />
+        app:layout_constraintVertical_bias="0.72" />
 
     <View
         android:id="@+id/homeScreen_view_quoteBackground"
@@ -84,7 +72,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.29" />
-
 
     <TextView
         android:id="@+id/homeScreen_txt_quote"
@@ -119,10 +106,10 @@
         android:layout_height="333dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.78"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.907">
+        app:layout_constraintVertical_bias="0.927">
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -17,11 +17,18 @@
     <string name="lock_icon">Lock Icon</string>
     <string name="user_icon">User Icon</string>
     <string name="remember_me">Remember me</string>
-    <string name="we_glad_to_see_you_back">We glad to see you back</string>
+    <string name="we_are_glad_to_see_you_back">We are glad to see you back</string>
     <string name="hello_user">Hello, User!</string>
     <string name="default_user_icon">default user icon</string>
     <string name="see_details">See details</string>
     <string name="create_new_quote">Create new quote</string>
     <string name="menu_dots">menu dots</string>
     <string name="change_user_icon">change user icon</string>
+    <string name="back_icon">back button</string>
+    <string name="name">Name</string>
+    <string name="update_profile">Update profile</string>
+    <string name="current_password">Current password</string>
+    <string name="new_password">New password</string>
+    <string name="log_out">Log out</string>
+    <string name="log_out_icon">log out icon</string>
 </resources>

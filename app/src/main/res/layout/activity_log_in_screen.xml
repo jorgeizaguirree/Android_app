@@ -112,16 +112,16 @@
 
     <ImageView
         android:id="@+id/logInScreen_image_userIcon"
-        android:layout_width="44dp"
-        android:layout_height="45dp"
+        android:layout_width="26dp"
+        android:layout_height="27dp"
         android:layout_marginStart="1dp"
         android:contentDescription="@string/user_icon"
         app:layout_constraintBottom_toBottomOf="@+id/logInScreen_txt_username"
         app:layout_constraintEnd_toEndOf="@+id/logInScreen_txt_username"
-        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintHorizontal_bias="0.07"
         app:layout_constraintStart_toStartOf="@+id/logInScreen_txt_username"
         app:layout_constraintTop_toTopOf="@+id/logInScreen_txt_username"
-        app:layout_constraintVertical_bias="0.466"
+        app:layout_constraintVertical_bias="0.482"
         app:srcCompat="@drawable/ic_user" />
 
     <Button

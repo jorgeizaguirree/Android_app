@@ -29,7 +29,7 @@ public class home_screen extends AppCompatActivity {
     Button url_btn;
     TextView quote, welcome, description;
     ImageView userImageView;
-    Uri imageUri; // Variable para almacenar la URI de la imagen
+    Uri imageUri;
     ActivityResultLauncher<Intent> galleryLauncher;
     ActivityResultLauncher<Intent> cameraLauncher;
 
@@ -62,7 +62,6 @@ public class home_screen extends AppCompatActivity {
         quote.setText("Loading...");
 
 
-
         galleryLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
@@ -89,52 +88,5 @@ public class home_screen extends AppCompatActivity {
                     }
                 }
         );
-
-        findViewById(R.id.homeScreen_image_changeIcon).setOnClickListener(v -> showIconPickerDialog());
-    }
-
-    private void showIconPickerDialog() {
-        String[] options = {"Default Icon", "Gallery", "Camera"};
-        new AlertDialog.Builder(this)
-                .setTitle("Choose Icon")
-                .setItems(options, (dialog, which) -> {
-                    if (which == 0) {
-                        showDefaultIconPicker();
-                    } else if (which == 1) {
-                        openGallery();
-                    } else {
-                        openCamera();
-                    }
-                })
-                .show();
-    }
-
-    private void showDefaultIconPicker() {
-        String[] defaultIcons = {"Girl", "Boy"};
-        new AlertDialog.Builder(this)
-                .setTitle("Choose Default Icon")
-                .setItems(defaultIcons, (dialog, which) -> {
-                    if (which == 0) {
-                        userImageView.setImageResource(R.drawable.ic_default_girl);
-                    } else {
-                        userImageView.setImageResource(R.drawable.ic_default_boy);
-                    }
-                })
-                .show();
-    }
-
-    private void openGallery() {
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*");
-        galleryLauncher.launch(intent);
-    }
-
-    private void openCamera() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            imageUri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, new ContentValues());
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-            cameraLauncher.launch(intent);
-        }
     }
 }

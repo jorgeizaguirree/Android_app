@@ -6,6 +6,7 @@ import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -28,6 +29,7 @@ public class welcomeScreen extends AppCompatActivity {
         LogInBtn = findViewById(R.id.welcomeScreen_btn_login);
         SignUPBtn = findViewById(R.id.welcomeScreen_btn_createAccount);
 
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         LogInBtn.setOnClickListener(view -> startActivity(new Intent(welcomeScreen.this, logInScreen.class)));
         SignUPBtn.setOnClickListener(view -> startActivity(new Intent(welcomeScreen.this, signUpScreen.class)));
