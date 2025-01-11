@@ -1,5 +1,7 @@
 package upm.es.proyecto_app;
 
+import androidx.annotation.NonNull;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -20,23 +22,35 @@ public class Reader {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] values = line.split(";");
-                if (values.length >= 3) { // Check if there are enough values for a Task
-                    String name = values[0];
-                    String description = values[1];
-                    String date = values[2];
-                    Task task = new Task(name, description, date);
-                    tasks.add(task);
-                } else {
-                    // Handle lines with insufficient data, e.g., log a warning
-                    System.err.println("Skipping line with insufficient data: " + line);
-                }
+                Task task = getTask(line);
+                tasks.add(task);
             }
         } catch (IOException e) {
             System.err.println("Error reading file: " + e.getMessage());
-            // Handle the exception appropriately
         }
 
         return tasks;
+    }
+
+    @NonNull
+    private static Task getTask(String line) {
+        String[] values = line.split(";");
+        String name = "";
+        String description = "";
+        String date = "";
+
+        // Assign values based on the number of fields in the line
+        if (values.length >= 1) {
+            name = values[0];
+        }
+        if (values.length >= 2) {
+            description = values[1];
+        }
+        if (values.length >= 3) {
+            date = values[2];
+        }
+
+        Task task = new Task(name, description, date);
+        return task;
     }
 }

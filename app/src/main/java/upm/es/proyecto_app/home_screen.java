@@ -1,14 +1,20 @@
 package upm.es.proyecto_app;
 
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
@@ -18,11 +24,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.io.FileReader;
 import java.util.List;
 import java.util.Random;
 
 public class home_screen extends AppCompatActivity {
+    private List<Task> task_list;
 
     int quoteCounter;
     List<Quotes> quotes;
@@ -88,5 +100,54 @@ public class home_screen extends AppCompatActivity {
                     }
                 }
         );
+
+        // Load tasks from file
+        Reader fileReader = new Reader("tasks.txt"); // Replace with your actual file path
+        task_list = fileReader.readTasks();
+
+        // Set up ListView
+        ListView listView = findViewById(R.id.task_list);
+        TaskAdapter adapter = new TaskAdapter(this, task_list); // Create an adapter
+        listView.setAdapter(adapter);
+
+
+        FloatingActionButton fab = findViewById(R.id.floatingActionButton);
+        fab.setOnClickListener(new com.google.ar.imp.view.View.OnClickListener() {
+            @Override
+            public void onClick(com.google.ar.imp.view.View v) {
+                showCreateTaskDialog();
+            }
+        });
+    }
+    private void showCreateTaskDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.create_task_dialog, null);
+        builder.setView(dialogView);
+
+        final EditText nameEditText = dialogView.findViewById(R.id.edit_task_name);
+        final EditText descriptionEditText = dialogView.findViewById(R.id.edit_task_description);
+        final EditText dateEditText = dialogView.findViewById(R.id.edit_task_date);
+
+        builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String name = nameEditText.getText().toString();
+                String description = descriptionEditText.getText().toString();
+                String date = dateEditText.getText().toString();
+
+                Task newTask = new Task(name, description, date);
+                task_list.add(newTask); // Add to the list
+
+                FWriter fileWriter = new FWriter("tasks.txt"); // Replace with your actual file path
+                fileWriter.writeTasks(newTask); // Write to file
+
+                adapter.notifyDataSetChanged(); // Update ListView
+            }
+        });
+        builder.setNegativeButton("Cancel", null);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
