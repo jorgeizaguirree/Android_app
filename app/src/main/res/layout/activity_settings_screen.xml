@@ -58,7 +58,8 @@
         app:layout_constraintVertical_bias="0.3"
         app:srcCompat="@drawable/ic_user" />
 
-    <TextView
+
+    <EditText
         android:id="@+id/profileScreen_editTextText_changeName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

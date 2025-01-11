@@ -1,24 +1,20 @@
 package upm.es.proyecto_app;
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.net.Uri;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.io.File;
 import java.util.List;
 import java.util.Random;
 
@@ -28,7 +24,7 @@ public class home_screen extends AppCompatActivity {
     List<Quotes> quotes;
     Button url_btn;
     TextView quote, welcome, description;
-    ImageView userImageView, settingsImageView;;
+    ImageView userImageView, settingsImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +52,19 @@ public class home_screen extends AppCompatActivity {
             startActivity(intent);
         });
 
-        String welcome_text = "Hello, " + getIntent().getStringExtra("user") + "!";
-        welcome.setText(welcome_text);
-
         APIconnection api = new APIconnection(this, quotes, quote);
         api.start();
         quote.setText("Loading...");
+
+        String welcome_text = "Hello, " + getIntent().getStringExtra("name") + "!";
+        welcome.setText(welcome_text);
+        File internalStorageDir = getFilesDir();
+        File imageFile = new File(internalStorageDir, getIntent().getStringExtra("user") + ".jpg");
+        if (imageFile.exists()) {
+            Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
+            userImageView.setImageBitmap(bitmap);
+        } else {
+            userImageView.setImageResource(R.drawable.ic_default_boy);
+        }
     }
 }
