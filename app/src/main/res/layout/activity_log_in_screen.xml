@@ -10,9 +10,9 @@
 
     <View
         android:id="@+id/logInScreen_view_whiteBackground"
-        android:layout_width="412dp"
-        android:layout_height="596dp"
-        android:layout_marginTop="348dp"
+        android:layout_width="411dp"
+        android:layout_height="553dp"
+        android:layout_marginTop="396dp"
         android:background="@drawable/white_rounded_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -76,6 +76,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
+    <ImageView
+        android:id="@+id/logInScreen_image_userIcon"
+        android:layout_width="26dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="1dp"
+        android:contentDescription="@string/user_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/logInScreen_txt_username"
+        app:layout_constraintEnd_toEndOf="@+id/logInScreen_txt_username"
+        app:layout_constraintHorizontal_bias="0.09"
+        app:layout_constraintStart_toStartOf="@+id/logInScreen_txt_username"
+        app:layout_constraintTop_toTopOf="@+id/logInScreen_txt_username"
+        app:layout_constraintVertical_bias="0.482"
+        app:srcCompat="@drawable/ic_user" />
+
     <EditText
         android:id="@+id/logInScreen_txt_username"
         android:layout_width="308dp"
@@ -86,49 +100,22 @@
         android:fontFamily="@font/montserrat_regular"
         android:gravity="center_vertical"
         android:hint="@string/username"
-        android:textSize="16sp"
         android:inputType="text"
         android:paddingStart="65dp"
         android:paddingEnd="20dp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.572" />
-
-    <ImageView
-        android:id="@+id/logInScreen_image_lockIcon"
-        android:layout_width="44dp"
-        android:layout_height="45dp"
-        android:contentDescription="@string/lock_icon"
-        app:layout_constraintBottom_toBottomOf="@+id/logInScreen_txt_password"
-        app:layout_constraintEnd_toEndOf="@+id/logInScreen_txt_password"
-        app:layout_constraintHorizontal_bias="0.044"
-        app:layout_constraintStart_toStartOf="@+id/logInScreen_txt_password"
-        app:layout_constraintTop_toTopOf="@+id/logInScreen_txt_password"
-        app:layout_constraintVertical_bias="0.466"
-        app:srcCompat="@drawable/ic_lock" />
-
-    <ImageView
-        android:id="@+id/logInScreen_image_userIcon"
-        android:layout_width="26dp"
-        android:layout_height="27dp"
-        android:layout_marginStart="1dp"
-        android:contentDescription="@string/user_icon"
-        app:layout_constraintBottom_toBottomOf="@+id/logInScreen_txt_username"
-        app:layout_constraintEnd_toEndOf="@+id/logInScreen_txt_username"
-        app:layout_constraintHorizontal_bias="0.07"
-        app:layout_constraintStart_toStartOf="@+id/logInScreen_txt_username"
-        app:layout_constraintTop_toTopOf="@+id/logInScreen_txt_username"
-        app:layout_constraintVertical_bias="0.482"
-        app:srcCompat="@drawable/ic_user" />
+        app:layout_constraintVertical_bias="0.595" />
 
     <Button
         android:id="@+id/logInScreen_btn_signIn"
         android:layout_width="308dp"
         android:layout_height="60dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/btn_light_gray_gradient"
         android:fontFamily="@font/montserrat_regular"
         android:text="@string/sign_in"
@@ -137,9 +124,7 @@
         app:layout_constraintBottom_toTopOf="@+id/logInScreen_txt_signUpText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logInScreen_checkBox"
-        app:layout_constraintVertical_bias="0.105" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/logInScreen_txt_signUpText"
@@ -150,26 +135,26 @@
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.881" />
+        app:layout_constraintVertical_bias="0.903" />
 
     <CheckBox
         android:id="@+id/logInScreen_checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="208dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:fontFamily="@font/montserrat_regular"
         android:text="@string/remember_me"
         android:textColor="@color/gray"
         android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/logInScreen_btn_signIn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.265"
+        app:layout_constraintHorizontal_bias="0.263"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logInScreen_txt_password"
-        app:layout_constraintVertical_bias="0.909" />
+        app:layout_constraintTop_toBottomOf="@+id/logInScreen_txt_password" />
 
     <EditText
         android:id="@+id/logInScreen_txt_password"
@@ -181,15 +166,28 @@
         android:fontFamily="@font/montserrat_regular"
         android:gravity="center_vertical"
         android:hint="@string/password"
-        android:textSize="16sp"
         android:inputType="textPassword"
         android:paddingStart="65dp"
         android:paddingEnd="20dp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.661" />
+        app:layout_constraintVertical_bias="0.685" />
+
+    <ImageView
+        android:id="@+id/logInScreen_image_lockIcon"
+        android:layout_width="44dp"
+        android:layout_height="45dp"
+        android:contentDescription="@string/lock_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/logInScreen_txt_password"
+        app:layout_constraintEnd_toEndOf="@+id/logInScreen_txt_password"
+        app:layout_constraintHorizontal_bias="0.067"
+        app:layout_constraintStart_toStartOf="@+id/logInScreen_txt_password"
+        app:layout_constraintTop_toTopOf="@+id/logInScreen_txt_password"
+        app:layout_constraintVertical_bias="0.533"
+        app:srcCompat="@drawable/ic_lock" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

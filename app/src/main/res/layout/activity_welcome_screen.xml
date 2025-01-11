@@ -10,8 +10,8 @@
 
     <View
         android:id="@+id/welcomeScreen_view_whiteBackground"
-        android:layout_width="409dp"
-        android:layout_height="335dp"
+        android:layout_width="413dp"
+        android:layout_height="359dp"
         android:layout_marginTop="76dp"
         android:background="@drawable/white_rounded_background"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,12 +20,11 @@
 
     <ImageView
         android:id="@+id/welcomeScreen_image_canvaLogo"
-        android:layout_width="410dp"
-        android:layout_height="400dp"
+        android:layout_width="443dp"
+        android:layout_height="430dp"
         android:contentDescription="@string/canva_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
@@ -44,7 +43,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.471" />
+        app:layout_constraintVertical_bias="0.481" />
 
     <TextView
         android:id="@+id/welcomeScreen_txt_slogan"
@@ -56,51 +55,50 @@
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.562" />
+        app:layout_constraintVertical_bias="0.547" />
 
     <Button
         android:id="@+id/welcomeScreen_btn_createAccount"
         android:layout_width="308dp"
         android:layout_height="60dp"
+        android:background="@drawable/btn_light_gray_gradient"
         android:fontFamily="@font/montserrat_regular"
         android:text="@string/create_account"
         android:textSize="15sp"
         app:backgroundTint="@null"
-        android:background="@drawable/btn_light_gray_gradient"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcomeScreen_btn_login"
-        app:layout_constraintVertical_bias="0.425" />
+        app:layout_constraintVertical_bias="0.434" />
 
     <Button
         android:id="@+id/welcomeScreen_btn_login"
         android:layout_width="308dp"
         android:layout_height="60dp"
+        android:background="@drawable/btn_dark_gray_gradient"
         android:fontFamily="@font/montserrat_regular"
         android:text="@string/login"
         android:textSize="15sp"
         app:backgroundTint="@null"
-        android:background="@drawable/btn_dark_gray_gradient"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/welcomeScreen_view_whiteBackground"
-        app:layout_constraintVertical_bias="0.261" />
+        app:layout_constraintVertical_bias="0.273" />
 
     <TextView
         android:id="@+id/welcomeScreen_txt_or"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/montserrat_regular"
         android:text="@string/or_txt"
         android:textColor="@color/gray"
-        android:fontFamily="@font/montserrat_regular"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

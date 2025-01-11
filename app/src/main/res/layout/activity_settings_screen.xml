@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/profileScreen_image_defaultUserIcon"
+        android:layout_width="218dp"
+        android:layout_height="217dp"
+        android:contentDescription="@string/default_user_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.201"
+        app:srcCompat="@drawable/ic_default_boy" />
+
+    <ImageView
+        android:id="@+id/profileScreen_image_changeIcon"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="180dp"
+        android:contentDescription="@string/change_user_icon"
+        app:layout_constraintEnd_toEndOf="@+id/profileScreen_image_defaultUserIcon"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="@+id/profileScreen_image_defaultUserIcon"
+        app:layout_constraintTop_toTopOf="@+id/profileScreen_image_defaultUserIcon"
+        app:srcCompat="@drawable/ic_upload" />
+
+    <ImageView
+        android:id="@+id/profileScreen_lockIcon"
+        android:layout_width="49dp"
+        android:layout_height="40dp"
+        android:contentDescription="@string/lock_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/profileScreen_editTextTextPassword_changePassword"
+        app:layout_constraintEnd_toEndOf="@+id/profileScreen_editTextTextPassword_changePassword"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/profileScreen_editTextTextPassword_changePassword"
+        app:layout_constraintTop_toTopOf="@+id/profileScreen_editTextTextPassword_changePassword"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_lock" />
+
+    <ImageView
+        android:id="@+id/profileScreen_userIcon"
+        android:layout_width="26dp"
+        android:layout_height="29dp"
+        android:contentDescription="@string/user_icon"
+        android:layout_marginTop="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/profileScreen_editTextText_changeName"
+        app:layout_constraintEnd_toEndOf="@+id/profileScreen_editTextText_changeName"
+        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintStart_toStartOf="@+id/profileScreen_editTextText_changeName"
+        app:layout_constraintTop_toTopOf="@+id/profileScreen_editTextText_changeName"
+        app:layout_constraintVertical_bias="0.3"
+        app:srcCompat="@drawable/ic_user" />
+
+
+    <EditText
+        android:id="@+id/profileScreen_editTextText_changeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:ems="15"
+        android:fontFamily="@font/montserrat_regular"
+        android:textSize="18sp"
+        android:hint="@string/name"
+        android:paddingStart="50dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileScreen_image_changeIcon" />
+
+    <TextView
+        android:id="@+id/profileScreen_editTextTextPassword_changePassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="64dp"
+        android:ems="15"
+        android:fontFamily="@font/montserrat_regular"
+        android:hint="@string/change_password"
+        android:paddingStart="50dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="10dp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/profileScreen_button_updateProfile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/profileScreen_button_updateProfile"
+        android:layout_width="308dp"
+        android:layout_height="60dp"
+        android:background="@drawable/btn_light_gray_gradient"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="@string/update_profile"
+        android:textSize="15sp"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.758" />
+
+    <Button
+        android:id="@+id/profileScreen_button_logOut"
+        android:layout_width="308dp"
+        android:layout_height="60dp"
+        android:background="@drawable/btn_light_gray_gradient"
+        android:fontFamily="@font/montserrat_regular"
+        android:paddingStart="20dp"
+        android:paddingEnd="45dp"
+        android:text="@string/log_out"
+        android:textSize="15sp"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.855" />
+
+    <ImageView
+        android:id="@+id/profileScreen_logOutIcon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:contentDescription="@string/log_out_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/profileScreen_button_logOut"
+        app:layout_constraintEnd_toEndOf="@+id/profileScreen_button_logOut"
+        app:layout_constraintHorizontal_bias="0.63"
+        app:layout_constraintStart_toStartOf="@+id/profileScreen_button_logOut"
+        app:layout_constraintTop_toTopOf="@+id/profileScreen_button_logOut"
+        app:srcCompat="@drawable/ic_log_out" />
+
+    <ImageView
+        android:id="@+id/profileScreen_backIcon"
+        android:layout_width="20dp"
+        android:layout_height="23dp"
+        android:contentDescription="@string/back_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.041"
+        app:srcCompat="@drawable/ic_back" />
+
+    <ImageView
+        android:id="@+id/profileScreen_image_nextIcon"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="10dp"
+        android:contentDescription="@string/next_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/profileScreen_editTextTextPassword_changePassword"
+        app:layout_constraintEnd_toEndOf="@+id/profileScreen_editTextTextPassword_changePassword"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/profileScreen_lockIcon"
+        app:layout_constraintTop_toTopOf="@+id/profileScreen_editTextTextPassword_changePassword"
+        app:layout_constraintVertical_bias="0.636"
+        app:srcCompat="@drawable/ic_next" />
+
+    <ImageView
+        android:id="@+id/profileScreen_image_editIcon"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="10dp"
+        android:contentDescription="@string/edit_name_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/profileScreen_editTextText_changeName"
+        app:layout_constraintEnd_toEndOf="@+id/profileScreen_editTextText_changeName"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/profileScreen_editTextText_changeName"
+        app:layout_constraintTop_toTopOf="@+id/profileScreen_editTextText_changeName"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/ic_edit" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

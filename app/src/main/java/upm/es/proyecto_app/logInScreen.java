@@ -1,7 +1,9 @@
 package upm.es.proyecto_app;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -83,9 +85,8 @@ public class logInScreen extends AppCompatActivity {
                 long prev_time = Long.parseLong(parts[2]);
                 long week = 604_800_000_000L;
                 if ( time - prev_time < week) {
-                    Intent intent = new Intent(logInScreen.this, home_screen.class);
-                    intent.putExtra("user", parts[0]);
-                    startActivity(intent);
+                    user.setText(parts[0]);
+                    password.setText(parts[1]);
                 } else {
                     Toast.makeText(logInScreen.this, "Session expired", Toast.LENGTH_SHORT).show();
                     rememberMe.setChecked(false);
@@ -112,14 +113,25 @@ public class logInScreen extends AppCompatActivity {
                     if (rememberMe.isChecked()){
                         try (FileOutputStream fos = new FileOutputStream(rememberFile, true)){
                             long time = System.currentTimeMillis();
-                            String line = user.getText().toString() + ";" + password.getText().toString().hashCode() +
+                            String line = user.getText().toString() + ";" + password.getText().toString() +
                                     ";" + time + "\n";
                             fos.write(line.getBytes());
                         } catch (IOException e) {
                             Toast.makeText(this, "Error remembering user", Toast.LENGTH_SHORT).show();
                         }
                     }
+                    String name = "name";
+                    try {
+                        File userFile = new File(getFilesDir(), user.getText().toString() + ".txt");
+                        FileInputStream fis = new FileInputStream(userFile);
+                        InputStreamReader isr = new InputStreamReader(fis);
+                        BufferedReader br = new BufferedReader(isr);
+                        name = br.readLine();
+                    } catch (IOException e){
+                        Toast.makeText(logInScreen.this, "Error getting name", Toast.LENGTH_SHORT).show();
+                    }
                     Intent intent = new Intent(logInScreen.this, home_screen.class);
+                    intent.putExtra("name", name);
                     intent.putExtra("user", user.getText().toString());
                     startActivity(intent);
                 } else if (result == USER_NOT_FOUND) {
@@ -137,15 +149,23 @@ public class logInScreen extends AppCompatActivity {
             startActivity(intent);
         });
         eraseButton.setOnClickListener(view -> {
-            try(FileOutputStream fos = new FileOutputStream(database)){
-                fos.write("".getBytes());
-                Toast.makeText(logInScreen.this, "Database erased", Toast.LENGTH_SHORT).show();
-            } catch (IOException e) {
-                Toast.makeText(logInScreen.this, "Error deleting database", Toast.LENGTH_SHORT).show();
-            }
+            deleteAllFiles(logInScreen.this);
+            Toast.makeText(this, "all files erased", Toast.LENGTH_SHORT).show();
+            eraseButton.setVisibility(View.GONE);
         });
 
 
+
+    }
+
+    public static void deleteAllFiles(Context context){
+        File internalStorageDir = context.getFilesDir();
+        File[] files = internalStorageDir.listFiles();
+        if (files != null){
+            for (File file : files){
+                file.delete();
+            }
+        }
 
     }
 }
