@@ -28,10 +28,7 @@ public class home_screen extends AppCompatActivity {
     List<Quotes> quotes;
     Button url_btn;
     TextView quote, welcome, description;
-    ImageView userImageView;
-    Uri imageUri;
-    ActivityResultLauncher<Intent> galleryLauncher;
-    ActivityResultLauncher<Intent> cameraLauncher;
+    ImageView userImageView, settingsImageView;;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +42,6 @@ public class home_screen extends AppCompatActivity {
             return insets;
         });
 
-
         Random random = new Random();
         quoteCounter = random.nextInt(10);
         url_btn = findViewById(R.id.homeScreen_btn_createQuote);
@@ -54,39 +50,17 @@ public class home_screen extends AppCompatActivity {
         welcome = findViewById(R.id.homeScreen_txt_username);
         userImageView = findViewById(R.id.homeScreen_image_defaultUserIcon);
 
+        settingsImageView = findViewById(R.id.homeScreen_image_settings);
+        settingsImageView.setOnClickListener(v -> {
+            Intent intent = new Intent(home_screen.this, settingsScreen.class);
+            startActivity(intent);
+        });
+
         String welcome_text = "Hello, " + getIntent().getStringExtra("user") + "!";
         welcome.setText(welcome_text);
 
         APIconnection api = new APIconnection(this, quotes, quote);
         api.start();
         quote.setText("Loading...");
-
-
-        galleryLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                        Uri selectedImageUri = result.getData().getData();
-                        if (selectedImageUri != null) {
-                            userImageView.setImageURI(selectedImageUri);
-                        }
-                    } else {
-                        Toast.makeText(this, "No image selected", Toast.LENGTH_SHORT).show();
-                    }
-                }
-        );
-
-        cameraLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                        if (imageUri != null) {
-                            userImageView.setImageURI(imageUri);
-                        }
-                    } else {
-                        Toast.makeText(this, "No image captured", Toast.LENGTH_SHORT).show();
-                    }
-                }
-        );
     }
 }

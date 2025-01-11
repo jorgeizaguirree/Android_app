@@ -9,17 +9,17 @@
     tools:context=".home_screen">
 
     <ImageView
-        android:id="@+id/homeScreen_image_dots"
-        android:layout_width="52dp"
-        android:layout_height="31dp"
-        android:contentDescription="@string/menu_dots"
+        android:id="@+id/homeScreen_image_settings"
+        android:layout_width="84dp"
+        android:layout_height="79dp"
+        android:contentDescription="@string/settings_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.955"
+        app:layout_constraintHorizontal_bias="0.96"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.041"
-        app:srcCompat="@drawable/ic_menu" />
+        app:layout_constraintVertical_bias="0.06"
+        app:srcCompat="@drawable/ic_settings" />
 
     <ImageView
         android:id="@+id/homeScreen_image_defaultUserIcon"

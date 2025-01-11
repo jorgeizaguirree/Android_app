@@ -61,5 +61,9 @@
         <activity
             android:name=".home_screen"
             android:exported="false" />
+
+        <!-- Settings Screen -->
+        <activity android:name=".settingsScreen" />
+
     </application>
 </manifest>
