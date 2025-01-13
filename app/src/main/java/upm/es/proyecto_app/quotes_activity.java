@@ -42,8 +42,8 @@ public class quotes_activity extends AppCompatActivity {
     }
 }
 class MyItemAdapter extends BaseAdapter {
-    private List<Quotes> quotes;
-    private Context context;
+    private final List<Quotes> quotes;
+    private final Context context;
 
     public MyItemAdapter(List<Quotes> quotes, Context context) {
         this.quotes = quotes;

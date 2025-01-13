@@ -1,5 +1,6 @@
 package upm.es.proyecto_app;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -30,7 +31,9 @@ public class settingsScreen extends AppCompatActivity {
     ActivityResultLauncher<Intent> cameraLauncher;
     EditText name;
     Button update, logOut;
+    int default_image;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +44,7 @@ public class settingsScreen extends AppCompatActivity {
         name = findViewById(R.id.profileScreen_editTextText_changeName);
         update = findViewById(R.id.profileScreen_button_updateProfile);
         logOut = findViewById(R.id.profileScreen_button_logOut);
+        default_image = 1;
 
         String origin = getIntent().getStringExtra("origin");
         if (origin != null && origin.equals("singUp")) {
@@ -91,13 +95,19 @@ public class settingsScreen extends AppCompatActivity {
         findViewById(R.id.profileScreen_image_changeIcon).setOnClickListener(v -> showIconPickerDialog());
 
         update.setOnClickListener(v -> {
-            if (imageUri != null) {
+            if (imageUri != null || default_image == 2) {
                 try {
+
                     imageFile.createNewFile();
                     try (FileOutputStream fos = new FileOutputStream(imageFile)) {
-                        InputStream is = getContentResolver().openInputStream(imageUri);
-                        Bitmap bitmap = BitmapFactory.decodeStream(is);
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                        if (imageUri != null) {
+                            InputStream is = getContentResolver().openInputStream(imageUri);
+                            Bitmap bitmap = BitmapFactory.decodeStream(is);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                        } else {
+                            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_default_girl);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                        }
                         Toast.makeText(this, "Image saved", Toast.LENGTH_SHORT).show();
                     }
                 } catch (IOException e) {
@@ -149,12 +159,10 @@ public class settingsScreen extends AppCompatActivity {
                 .setItems(defaultIcons, (dialog, which) -> {
                     if (which == 0) {
                         userImageView.setImageResource(R.drawable.ic_default_girl);
-                        App app = (App) getApplication();
-                        app.setImage(R.drawable.ic_default_girl);
+                        default_image = 2;
                     } else {
                         userImageView.setImageResource(R.drawable.ic_default_boy);
-                        App app = (App) getApplication();
-                        app.setImage(R.drawable.ic_default_boy);
+                        default_image = 1;
                     }
                 })
                 .show();

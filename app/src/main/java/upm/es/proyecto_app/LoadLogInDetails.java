@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class LoadLogInDetails {
 
-    private Map<String, Integer> logInDetails = new HashMap<>();
+    private final Map<String, Integer> logInDetails = new HashMap<>();
     int CORRECT = 1, PASS_WRONG = 2, USER_NOT_FOUND = 3;
 
     public LoadLogInDetails(BufferedReader br) throws IOException {
@@ -21,6 +21,8 @@ public class LoadLogInDetails {
         int hashCode = test.hashCode();
         logInDetails.put("user", hashCode);
     }
+
+
     public int findUser(String user, String password){
         int hashCode = password.hashCode();
         if (logInDetails.containsKey(user)){

@@ -1,11 +1,11 @@
     package upm.es.proyecto_app;
 
+    import android.annotation.SuppressLint;
     import android.content.Intent;
     import android.graphics.Bitmap;
     import android.graphics.BitmapFactory;
     import android.os.Bundle;
     import android.view.View;
-    import android.widget.Button;
     import android.widget.EditText;
     import android.widget.ImageView;
     import android.widget.ListView;
@@ -22,24 +22,17 @@
     import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
     import java.io.File;
-    import java.io.IOException;
-    import java.text.DateFormat;
-    import java.text.ParseException;
-    import java.text.SimpleDateFormat;
     import java.util.ArrayList;
-    import java.util.Date;
     import java.util.List;
-    import java.util.Random;
 
     public class home_screen extends AppCompatActivity {
         List <Task> taskList;
-        int quoteCounter;
         List<Quotes> quotes;
-        Button url_btn;
         TextView quote, welcome, description;
         ImageView userImageView, settingsImageView;
         View view;
 
+        @SuppressLint("SetTextI18n")
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -52,8 +45,7 @@
                 return insets;
             });
 
-            Random random = new Random();
-            quoteCounter = random.nextInt(10);
+
             quote = findViewById(R.id.homeScreen_txt_quote);
             description = findViewById(R.id.homeScreen_txt_welcomeDescription);
             welcome = findViewById(R.id.homeScreen_txt_username);
@@ -69,7 +61,7 @@
                 startActivity(intent);
             });
 
-            APIconnection api = new APIconnection(this, quotes, quote, 1);
+            APIconnection api = new APIconnection(this, quotes, quote);
             api.start();
             quote.setText("Loading...");
 
@@ -81,12 +73,7 @@
                 Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
                 userImageView.setImageBitmap(bitmap);
             } else {
-                App app = (App) getApplication();
-                if (app.getImage() == R.drawable.ic_default_girl) {
-                    userImageView.setImageResource(R.drawable.ic_default_girl);
-                } else {
-                    userImageView.setImageResource(R.drawable.ic_default_boy);
-                }
+                userImageView.setImageResource(R.drawable.ic_default_boy);
             }
 
             view.setOnClickListener(v -> {
@@ -147,6 +134,8 @@
                     // Notificar al adaptador
                     ListView listView = findViewById(R.id.task_list);
                     ((TaskAdapter) listView.getAdapter()).notifyDataSetChanged();
+
+
             });
 
             builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());

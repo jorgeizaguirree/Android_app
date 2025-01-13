@@ -18,14 +18,11 @@ public class APIconnection extends Thread {
     Activity activity;
     List<Quotes> quotes;
     TextView quote;
-    int option;
-    int ONE_QUOTE = 1, LIST = 2;
 
-    public APIconnection(Activity activity, List<Quotes> quotes, TextView quote, int option) {
+    public APIconnection(Activity activity, List<Quotes> quotes, TextView quote) {
         this.activity = activity;
         this.quotes = quotes;
         this.quote = quote;
-        this.option = option;
 
     }
     @Override
@@ -42,10 +39,9 @@ public class APIconnection extends Thread {
         quotes = Arrays.asList(gson.fromJson(response, Quotes[].class));
         App app = (App) activity.getApplication();
         app.setQuotesList(quotes);
-        if (option == ONE_QUOTE) {
-            int random = new Random().nextInt(quotes.size());
-            String text = quotes.get(random).getQuote() + "\n\n" + quotes.get(random).getAuthor();
-            activity.runOnUiThread(() -> quote.setText(text));
-        }
+        int random = new Random().nextInt(quotes.size());
+        String text = quotes.get(random).getQuote() + "\n\n" + quotes.get(random).getAuthor();
+        activity.runOnUiThread(() -> quote.setText(text));
+
     }
 }
