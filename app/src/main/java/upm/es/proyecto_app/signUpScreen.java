@@ -88,6 +88,7 @@ public class signUpScreen extends AppCompatActivity {
                         Intent intent = new Intent(signUpScreen.this, settingsScreen.class);
                         intent.putExtra("name", name.getText().toString());
                         intent.putExtra("user", user.getText().toString());
+                        intent.putExtra("origin", "signUp");
                         startActivity(intent);
                     } catch (IOException e) {
                         Toast.makeText(signUpScreen.this, "Error writing database", Toast.LENGTH_SHORT).show();

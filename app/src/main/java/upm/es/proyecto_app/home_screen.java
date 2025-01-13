@@ -54,6 +54,7 @@
                 Intent intent = new Intent(home_screen.this, settingsScreen.class);
                 intent.putExtra("user", getIntent().getStringExtra("user"));
                 intent.putExtra("name", getIntent().getStringExtra("name"));
+                intent.putExtra("origin", "home");
                 startActivity(intent);
             });
 
