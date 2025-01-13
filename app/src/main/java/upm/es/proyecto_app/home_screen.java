@@ -6,21 +6,33 @@
     import android.os.Bundle;
     import android.view.View;
     import android.widget.Button;
+    import android.widget.EditText;
     import android.widget.ImageView;
+    import android.widget.ListView;
     import android.widget.TextView;
+    import android.widget.Toast;
 
     import androidx.activity.EdgeToEdge;
+    import androidx.appcompat.app.AlertDialog;
     import androidx.appcompat.app.AppCompatActivity;
     import androidx.core.graphics.Insets;
     import androidx.core.view.ViewCompat;
     import androidx.core.view.WindowInsetsCompat;
 
+    import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
     import java.io.File;
+    import java.io.IOException;
+    import java.text.DateFormat;
+    import java.text.ParseException;
+    import java.text.SimpleDateFormat;
+    import java.util.ArrayList;
+    import java.util.Date;
     import java.util.List;
     import java.util.Random;
 
     public class home_screen extends AppCompatActivity {
-
+        List <Task> taskList;
         int quoteCounter;
         List<Quotes> quotes;
         Button url_btn;
@@ -78,5 +90,66 @@
                 intent.putExtra("user", getIntent().getStringExtra("user"));
                 startActivity(intent);
             });
+
+            File taskFile = new File(getFilesDir(), getIntent().getStringExtra("user")+ "_tasks.txt");
+            Reader reader= new Reader(taskFile);
+            taskList =  new ArrayList<>();
+            reader.readTasks(taskList, taskFile);
+            if(taskList.isEmpty()) Toast.makeText(this, "Lista Vacia",Toast.LENGTH_SHORT).show();
+            TaskAdapter adapter = new TaskAdapter(this, taskList);
+
+
+            ListView listView = findViewById(R.id.task_list);
+            listView.setAdapter(adapter);
+
+            FloatingActionButton floatingActionButton = findViewById(R.id.floatingActionButton);
+            floatingActionButton.setOnClickListener(v -> showAddTaskDialog());
+
+        }
+
+        private void showAddTaskDialog() {
+            // Construir el cuadro de diálogo
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Add New Task");
+
+            // Inflar un diseño para el cuadro de diálogo
+            View dialogView = getLayoutInflater().inflate(R.layout.dialog_add_task, null);
+            builder.setView(dialogView);
+
+            // Referenciar los campos de entrada en el diseño
+            EditText taskNameInput = dialogView.findViewById(R.id.dialog_task_name);
+            EditText taskDescriptionInput = dialogView.findViewById(R.id.dialog_task_description);
+            EditText taskDateInput = dialogView.findViewById(R.id.dialog_task_date);
+
+
+            builder.setPositiveButton("Add", (dialog, which) -> {
+                String name = taskNameInput.getText().toString().trim();
+                String description = taskDescriptionInput.getText().toString().trim();
+                String dateString = taskDateInput.getText().toString().trim();
+                Toast.makeText(this, getFilesDir().toString(), Toast.LENGTH_SHORT).show();
+                // Validar entrada
+                if (name.isEmpty() || dateString.isEmpty()) {
+                    Toast.makeText(this, "Name and Date are required", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                    // Crear nueva tarea y añadirla a la lista
+                    Task newTask = new Task(name, description, dateString);
+                    taskList.add(newTask);
+
+                    // Escribir la nueva tarea al archivo
+                    FWriter writer = new FWriter(new File(getFilesDir(), getIntent().getStringExtra("user") + "_tasks.txt"));
+                    writer.writeTasks(newTask);
+
+                    // Notificar al adaptador
+                    ListView listView = findViewById(R.id.task_list);
+                    ((TaskAdapter) listView.getAdapter()).notifyDataSetChanged();
+
+
+            });
+
+            builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
+
+            // Mostrar el cuadro de diálogo
+            builder.create().show();
         }
     }

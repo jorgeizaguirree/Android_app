@@ -35,4 +35,7 @@
     <string name="settings_icon">settings icon</string>
     <string name="edit_name_icon">edit name icon</string>
     <string name="next_icon">next icon</string>
+    <string name="task_description">task_description</string>
+    <string name="task_name">task_name</string>
+    <string name="date_dd_mm_yyyy">date_dd_mm_yyyy</string>
 </resources>

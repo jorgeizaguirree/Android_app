@@ -1,43 +1,60 @@
 package upm.es.proyecto_app;
 
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
-public class Reader {
+public class Reader extends AppCompatActivity {
 
-    private String filePath;
+    private File file;
 
-    public Reader(String filePath) {
-        this.filePath = filePath;
+    public Reader(File file) {
+        this.file = file;
     }
 
-    public List<Task> readTasks() {
-        List<Task> tasks = new ArrayList<>();
+    public void readTasks(List<Task> tasks, File internalStorageDir) {
+        try {
+            //noinspection ResultOfMethodCallIgnored
+            file.createNewFile();
+            FileInputStream fis = new FileInputStream(file);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
-            while ((line = reader.readLine()) != null) {
+            while ((line = br.readLine()) != null) {
                 Task task = getTask(line);
                 tasks.add(task);
             }
-        } catch (IOException e) {
-            System.err.println("Error reading file: " + e.getMessage());
+
+        } catch (IOException e){
+            Toast.makeText(this, "Error reading database", Toast.LENGTH_SHORT).show();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
         }
 
-        return tasks;
     }
 
     @NonNull
-    private static Task getTask(String line) {
+    private static Task getTask(String line) throws ParseException {
         String[] values = line.split(";");
         String name = "";
         String description = "";
-        String date = "";
+        String date = null;
 
         // Assign values based on the number of fields in the line
         if (values.length >= 1) {
@@ -48,8 +65,8 @@ public class Reader {
         }
         if (values.length >= 3) {
             date = values[2];
-        }
 
+        }
         Task task = new Task(name, description, date);
         return task;
     }

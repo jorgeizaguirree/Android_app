@@ -5,40 +5,53 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
-public class TaskAdapter extends ArrayAdapter<Task> {
+public class TaskAdapter extends BaseAdapter {
 
-    private final Context context;
-    private final List<Task> tasks;
+    private final List<Task> items;
+    private final Context mContext;
 
-    public TaskAdapter(Context context, List<Task> tasks) {
-        super(context, 0, tasks);
-        this.context = context;
-        this.tasks = tasks;
+    public TaskAdapter(Context context,  List<Task> items) {
+        this.items=items;
+        this.mContext = context;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View listItemView = convertView;
-        if (listItemView == null) {
-            listItemView = LayoutInflater.from(context).inflate(R.layout.activity_home_screen, parent, false); // Inflate the main layout
+    public int getCount() {
+        return items.size();
+    }
+
+    @Override
+    public Object getItem(int i) {
+        return items.get(i);
+    }
+
+    @Override
+    public long getItemId(int i) {
+        return i;
+    }
+
+    @Override
+    public View getView(int position, View view, ViewGroup parent) {
+
+        if (view == null) {
+
+            view = view.inflate(mContext, android.R.layout.simple_list_item_1,null);
         }
 
-        Task currentTask = tasks.get(position);
+        Task task = items.get(position);
 
-        // Find TextViews in the main layout
-        TextView nameTextView = listItemView.findViewById(R.id.homeScreen_txt_username); // Replace with the ID of the TextView for the name
-        TextView descriptionTextView = listItemView.findViewById(R.id.homeScreen_txt_welcomeDescription); // Replace with the ID of the TextView for the description
-        TextView dateTextView = listItemView.findViewById(R.id.homeScreen_txt_quote); // Replace with the ID of the TextView for the date
+        // Asigna los datos a las vistas del ListView
+        String text = task.getName() + "\n" + task.getDescription() + "\n" + task.getDate();
+        TextView Tview = view.findViewById(android.R.id.text1);
+        Tview.setText(text);
 
-        // Set the text of the TextViews
-        nameTextView.setText(currentTask.getName());
-        descriptionTextView.setText(currentTask.getDescription());
-        dateTextView.setText(currentTask.getDate());
-
-        return listItemView;
+        return view;
     }
 }
