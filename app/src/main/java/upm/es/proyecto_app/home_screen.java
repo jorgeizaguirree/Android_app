@@ -1,9 +1,12 @@
     package upm.es.proyecto_app;
 
+    import android.Manifest;
     import android.annotation.SuppressLint;
     import android.content.Intent;
+    import android.content.pm.PackageManager;
     import android.graphics.Bitmap;
     import android.graphics.BitmapFactory;
+    import android.os.Build;
     import android.os.Bundle;
     import android.view.View;
     import android.widget.EditText;
@@ -13,19 +16,23 @@
     import android.widget.Toast;
 
     import androidx.activity.EdgeToEdge;
+    import androidx.annotation.NonNull;
     import androidx.appcompat.app.AlertDialog;
     import androidx.appcompat.app.AppCompatActivity;
+    import androidx.core.app.ActivityCompat;
+    import androidx.core.content.ContextCompat;
     import androidx.core.graphics.Insets;
     import androidx.core.view.ViewCompat;
     import androidx.core.view.WindowInsetsCompat;
 
-    import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
     import java.io.File;
     import java.util.ArrayList;
     import java.util.List;
 
     public class home_screen extends AppCompatActivity {
+
+        private static final int NOTIFICATION_PERMISSION_REQUEST_CODE = 101;
         List <Task> taskList;
         List<Quotes> quotes;
         TextView quote, welcome, description, noTask;
@@ -101,6 +108,8 @@
             listView.setAdapter(adapter);
             ImageView floatingActionButton = findViewById(R.id.homeScreen_btn_addTask);
             floatingActionButton.setOnClickListener(v -> showAddTaskDialog());
+
+
 
         }
 
@@ -224,6 +233,26 @@
                 ListView listView = findViewById(R.id.task_list);
                 ((TaskAdapter) listView.getAdapter()).notifyDataSetChanged();
 
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+
+                        NotificationHelper.createNotificationChannel(this);
+                        String title = name + " due for " + dateString;
+                        NotificationHelper.showNotification(this, title, description);
+                    } else {
+                        requestNotificationPermission();
+                        NotificationHelper.createNotificationChannel(this);
+                        String title = name + " due for " + dateString;
+                        NotificationHelper.showNotification(this, title, description);
+                    }
+                } else {
+                    NotificationHelper.createNotificationChannel(this);
+                    String title = name + " due for " + dateString;
+                    NotificationHelper.showNotification(this, title, description);
+                }
+
+
+
 
             });
 
@@ -232,4 +261,11 @@
             // Mostrar el cuadro de diálogo
             builder.create().show();
         }
+
+        private void requestNotificationPermission() {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, NOTIFICATION_PERMISSION_REQUEST_CODE);
+            }
+        }
+
     }
