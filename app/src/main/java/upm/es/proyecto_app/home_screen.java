@@ -28,7 +28,7 @@
     public class home_screen extends AppCompatActivity {
         List <Task> taskList;
         List<Quotes> quotes;
-        TextView quote, welcome, description;
+        TextView quote, welcome, description, noTask;
         ImageView userImageView, settingsImageView;
         View view;
 
@@ -51,6 +51,8 @@
             welcome = findViewById(R.id.homeScreen_txt_username);
             userImageView = findViewById(R.id.homeScreen_image_defaultUserIcon);
             view = findViewById(R.id.homeScreen_view_quoteBackground);
+            noTask = findViewById(R.id.homeScreen_txt_noQuote);
+
 
             settingsImageView = findViewById(R.id.homeScreen_image_settings);
             settingsImageView.setOnClickListener(v -> {
@@ -88,6 +90,9 @@
             reader.readTasks(taskList, taskFile);
             if(taskList.isEmpty()) Toast.makeText(this, "Lista Vacia",Toast.LENGTH_SHORT).show();
             TaskAdapter adapter = new TaskAdapter(this, taskList);
+
+            if(taskList.isEmpty()) noTask.setVisibility(View.VISIBLE);
+            else noTask.setVisibility(View.GONE);
 
 
             ListView listView = findViewById(R.id.task_list);
