@@ -8,9 +8,12 @@
     import android.graphics.BitmapFactory;
     import android.os.Build;
     import android.os.Bundle;
+    import android.text.InputType;
     import android.view.View;
+    import android.widget.BaseAdapter;
     import android.widget.EditText;
     import android.widget.ImageView;
+    import android.widget.LinearLayout;
     import android.widget.ListView;
     import android.widget.TextView;
     import android.widget.Toast;
@@ -116,8 +119,7 @@
 
 
         private void showOptionsDialog(int position, ListView listView) {
-            String[] options = {"See Description","Edit Task","Finish Task"};
-
+            String[] options = {"See Description","Edit Task","Finish Task", "Share Task"};
             new AlertDialog.Builder(this)
                     .setTitle("Task Options")
                     .setItems(options, (dialog, which) -> {
@@ -127,7 +129,7 @@
                         } else if (which == 1) {
                             Task taskToEdit = taskList.get(position);
                             showEditTaskDialog(taskToEdit, position, listView);
-                        } else {
+                        } else if (which == 2) {
                             FWriter writer = new FWriter(new File(getFilesDir(), getIntent().getStringExtra("user") + "_tasks.txt"));
                             writer.removeTask(taskList, taskList.get(position));
 
@@ -138,11 +140,24 @@
 
                             // Notify adapter
                             ((TaskAdapter) listView.getAdapter()).notifyDataSetChanged();
+                        }else if (which == 3) {
+                            Task task = taskList.get(position);
+                            shareTask(task);
                         }
                     })
                     .show();
 
         }
+
+        private void shareTask(Task task) {
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            String shareContent = "Task: " + task.getName() + "\nDescription: " + task.getDescription() + "\nDate: " + task.getDate();
+            shareIntent.putExtra(Intent.EXTRA_TEXT, shareContent);
+
+            startActivity(Intent.createChooser(shareIntent, "Share Task via"));
+        }
+
 
         private void showDescriptionDialog(String descriptionText) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
