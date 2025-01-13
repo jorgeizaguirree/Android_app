@@ -87,6 +87,9 @@ public class settingsScreen extends AppCompatActivity {
                 }
         );
 
+        logOut.setOnClickListener(v -> startActivity(new Intent(settingsScreen.this, welcomeScreen.class)));
+        findViewById(R.id.profileScreen_image_changeIcon).setOnClickListener(v -> showIconPickerDialog());
+
         update.setOnClickListener(v -> {
             if (imageUri != null) {
                 try {
@@ -119,8 +122,8 @@ public class settingsScreen extends AppCompatActivity {
             intent.putExtra("user", getIntent().getStringExtra("user"));
             startActivity(intent);
         });
-        logOut.setOnClickListener(v -> startActivity(new Intent(settingsScreen.this, welcomeScreen.class)));
-        findViewById(R.id.profileScreen_image_changeIcon).setOnClickListener(v -> showIconPickerDialog());
+
+
     }
 
     private void showIconPickerDialog() {
@@ -146,8 +149,12 @@ public class settingsScreen extends AppCompatActivity {
                 .setItems(defaultIcons, (dialog, which) -> {
                     if (which == 0) {
                         userImageView.setImageResource(R.drawable.ic_default_girl);
+                        App app = (App) getApplication();
+                        app.setImage(R.drawable.ic_default_girl);
                     } else {
                         userImageView.setImageResource(R.drawable.ic_default_boy);
+                        App app = (App) getApplication();
+                        app.setImage(R.drawable.ic_default_boy);
                     }
                 })
                 .show();

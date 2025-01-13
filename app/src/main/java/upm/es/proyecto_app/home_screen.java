@@ -82,7 +82,12 @@
                 Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
                 userImageView.setImageBitmap(bitmap);
             } else {
-                userImageView.setImageResource(R.drawable.ic_default_boy);
+                App app = (App) getApplication();
+                if (app.getImage() == R.drawable.ic_default_girl) {
+                    userImageView.setImageResource(R.drawable.ic_default_girl);
+                } else {
+                    userImageView.setImageResource(R.drawable.ic_default_boy);
+                }
             }
 
             view.setOnClickListener(v -> {
