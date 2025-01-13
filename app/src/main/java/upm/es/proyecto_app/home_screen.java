@@ -1,6 +1,9 @@
     package upm.es.proyecto_app;
 
     import android.annotation.SuppressLint;
+    import android.app.AlarmManager;
+    import android.app.PendingIntent;
+    import android.content.Context;
     import android.content.Intent;
     import android.graphics.Bitmap;
     import android.graphics.BitmapFactory;
@@ -32,6 +35,10 @@
         ImageView userImageView, settingsImageView;
         View view;
 
+
+
+        NotificationHelper handler;
+
         @SuppressLint("SetTextI18n")
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +52,7 @@
                 return insets;
             });
 
-
+            handler = new NotificationHelper(this);
             quote = findViewById(R.id.homeScreen_txt_quote);
             description = findViewById(R.id.homeScreen_txt_welcomeDescription);
             welcome = findViewById(R.id.homeScreen_txt_username);
@@ -101,7 +108,13 @@
             FloatingActionButton floatingActionButton = findViewById(R.id.floatingActionButton);
             floatingActionButton.setOnClickListener(v -> showAddTaskDialog());
 
+
+
         }
+
+
+
+
 
         private void showAddTaskDialog() {
             // Construir el cuadro de diálogo
@@ -140,6 +153,10 @@
                     ListView listView = findViewById(R.id.task_list);
                     ((TaskAdapter) listView.getAdapter()).notifyDataSetChanged();
 
+                NotificationHelper.createNotificationChannel(this);
+                String title = name + " for " + dateString;
+                NotificationHelper.showNotification(this, title, description);
+
 
             });
 
@@ -149,3 +166,4 @@
             builder.create().show();
         }
     }
+
