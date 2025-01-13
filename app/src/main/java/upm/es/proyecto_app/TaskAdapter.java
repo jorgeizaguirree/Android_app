@@ -48,7 +48,7 @@ public class TaskAdapter extends BaseAdapter {
         Task task = items.get(position);
 
         // Asigna los datos a las vistas del ListView
-        String text = task.getName() + "\n" + task.getDescription() + "\n" + task.getDate();
+        String text = task.getName() + "\n" + task.getDate();
         TextView Tview = view.findViewById(R.id.homeScreen_txt_task);
         Tview.setText(text);
 

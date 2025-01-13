@@ -1,9 +1,6 @@
     package upm.es.proyecto_app;
 
     import android.annotation.SuppressLint;
-    import android.app.AlarmManager;
-    import android.app.PendingIntent;
-    import android.content.Context;
     import android.content.Intent;
     import android.graphics.Bitmap;
     import android.graphics.BitmapFactory;
@@ -35,10 +32,6 @@
         ImageView userImageView, settingsImageView;
         View view;
 
-
-
-        NotificationHelper handler;
-
         @SuppressLint("SetTextI18n")
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +45,7 @@
                 return insets;
             });
 
-            handler = new NotificationHelper(this);
+
             quote = findViewById(R.id.homeScreen_txt_quote);
             description = findViewById(R.id.homeScreen_txt_welcomeDescription);
             welcome = findViewById(R.id.homeScreen_txt_username);
@@ -93,28 +86,107 @@
 
             File taskFile = new File(getFilesDir(), getIntent().getStringExtra("user")+ "_tasks.txt");
             Reader reader= new Reader(taskFile);
+            FWriter writer = new FWriter(taskFile);
             taskList =  new ArrayList<>();
             reader.readTasks(taskList, taskFile);
             if(taskList.isEmpty()) Toast.makeText(this, "Lista Vacia",Toast.LENGTH_SHORT).show();
             TaskAdapter adapter = new TaskAdapter(this, taskList);
 
-            if(taskList.isEmpty()) noTask.setVisibility(View.VISIBLE);
-            else noTask.setVisibility(View.GONE);
-
-
             ListView listView = findViewById(R.id.task_list);
             listView.setAdapter(adapter);
 
-            FloatingActionButton floatingActionButton = findViewById(R.id.floatingActionButton);
+            listView.setOnItemClickListener((parent, view, position, id) -> {
+                showOptionsDialog(position, listView);
+            });
+            listView.setAdapter(adapter);
+            ImageView floatingActionButton = findViewById(R.id.homeScreen_btn_addTask);
             floatingActionButton.setOnClickListener(v -> showAddTaskDialog());
-
-
 
         }
 
 
 
+        private void showOptionsDialog(int position, ListView listView) {
+            String[] options = {"See Description","Edit Task","Finish Task"};
 
+            new AlertDialog.Builder(this)
+                    .setTitle("Task Options")
+                    .setItems(options, (dialog, which) -> {
+                        if (which == 0) {
+                            Task task = taskList.get(position);
+                            showDescriptionDialog(task.getDescription());
+                        } else if (which == 1) {
+                            Task taskToEdit = taskList.get(position);
+                            showEditTaskDialog(taskToEdit, position, listView);
+                        } else {
+                            FWriter writer = new FWriter(new File(getFilesDir(), getIntent().getStringExtra("user") + "_tasks.txt"));
+                            writer.removeTask(taskList, taskList.get(position));
+
+                            // Reload task list from file
+                            taskList.clear(); // Clear the existing list
+                            Reader reader = new Reader(new File(getFilesDir(), getIntent().getStringExtra("user") + "_tasks.txt"));
+                            reader.readTasks(taskList, new File(getFilesDir(), getIntent().getStringExtra("user") + "_tasks.txt"));
+
+                            // Notify adapter
+                            ((TaskAdapter) listView.getAdapter()).notifyDataSetChanged();
+                        }
+                    })
+                    .show();
+
+        }
+
+        private void showDescriptionDialog(String descriptionText) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Task Description");
+            builder.setMessage(descriptionText);
+            builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+            builder.create().show();
+        }
+
+        private void showEditTaskDialog(Task taskToEdit, int position, ListView listView) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Edit Task");
+
+            View dialogView = getLayoutInflater().inflate(R.layout.dialog_edit_task, null); // Create edit_task layout
+            builder.setView(dialogView);
+
+            EditText taskNameInput = dialogView.findViewById(R.id.edit_task_name);
+            EditText taskDescriptionInput = dialogView.findViewById(R.id.edit_task_description);
+            EditText taskDateInput = dialogView.findViewById(R.id.edit_task_date);
+
+            // Set initial values
+            taskNameInput.setText(taskToEdit.getName());
+            taskDescriptionInput.setText(taskToEdit.getDescription());
+            taskDateInput.setText(taskToEdit.getDate());
+
+            builder.setPositiveButton("Save", (dialog, which) -> {
+                String newName = taskNameInput.getText().toString().trim();
+                String newDescription = taskDescriptionInput.getText().toString().trim();
+                String newDate = taskDateInput.getText().toString().trim();
+
+                // Update the task
+                taskToEdit.setName(newName);
+                taskToEdit.setDescription(newDescription);
+                taskToEdit.setDate(newDate);
+
+                // Update the file
+                FWriter writer = new FWriter(new File(getFilesDir(), getIntent().getStringExtra("user") + "_tasks.txt"));
+                writer.removeTask(taskList, taskList.get(position));
+                writer.writeTasks(taskToEdit);
+
+                // Reload task list from file
+                taskList.clear(); // Clear the existing list
+                Reader reader = new Reader(new File(getFilesDir(), getIntent().getStringExtra("user") + "_tasks.txt"));
+                reader.readTasks(taskList, new File(getFilesDir(), getIntent().getStringExtra("user") + "_tasks.txt"));
+
+                // Notify adapter
+                ((TaskAdapter) listView.getAdapter()).notifyDataSetChanged();
+            });
+
+            builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
+
+            builder.create().show();
+        }
 
         private void showAddTaskDialog() {
             // Construir el cuadro de diálogo
@@ -130,7 +202,6 @@
             EditText taskDescriptionInput = dialogView.findViewById(R.id.dialog_task_description);
             EditText taskDateInput = dialogView.findViewById(R.id.dialog_task_date);
 
-
             builder.setPositiveButton("Add", (dialog, which) -> {
                 String name = taskNameInput.getText().toString().trim();
                 String description = taskDescriptionInput.getText().toString().trim();
@@ -141,21 +212,17 @@
                     Toast.makeText(this, "Name and Date are required", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                    // Crear nueva tarea y añadirla a la lista
-                    Task newTask = new Task(name, description, dateString);
-                    taskList.add(newTask);
+                // Crear nueva tarea y añadirla a la lista
+                Task newTask = new Task(name, description, dateString);
+                taskList.add(newTask);
 
-                    // Escribir la nueva tarea al archivo
-                    FWriter writer = new FWriter(new File(getFilesDir(), getIntent().getStringExtra("user") + "_tasks.txt"));
-                    writer.writeTasks(newTask);
+                // Escribir la nueva tarea al archivo
+                FWriter writer = new FWriter(new File(getFilesDir(), getIntent().getStringExtra("user") + "_tasks.txt"));
+                writer.writeTasks(newTask);
 
-                    // Notificar al adaptador
-                    ListView listView = findViewById(R.id.task_list);
-                    ((TaskAdapter) listView.getAdapter()).notifyDataSetChanged();
-
-                NotificationHelper.createNotificationChannel(this);
-                String title = name + " for " + dateString;
-                NotificationHelper.showNotification(this, title, description);
+                // Notificar al adaptador
+                ListView listView = findViewById(R.id.task_list);
+                ((TaskAdapter) listView.getAdapter()).notifyDataSetChanged();
 
 
             });
@@ -166,4 +233,3 @@
             builder.create().show();
         }
     }
-
