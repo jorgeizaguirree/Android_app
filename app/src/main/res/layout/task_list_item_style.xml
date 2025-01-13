@@ -9,7 +9,7 @@
     <View
         android:id="@+id/homeScreen_view_quoteBackground"
         android:layout_width="314dp"
-        android:layout_height="46dp"
+        android:layout_height="50dp"
         android:background="@drawable/task_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,15 +19,16 @@
 
     <TextView
         android:id="@+id/homeScreen_txt_task"
-        android:layout_width="241dp"
-        android:layout_height="wrap_content"
+        android:layout_width="280dp"
+        android:layout_height="35dp"
         android:fontFamily="@font/montserrat_regular"
         android:text=""
         android:textColor="@color/gray"
         app:layout_constraintBottom_toBottomOf="@+id/homeScreen_view_quoteBackground"
         app:layout_constraintEnd_toEndOf="@+id/homeScreen_view_quoteBackground"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.475"
         app:layout_constraintStart_toStartOf="@+id/homeScreen_view_quoteBackground"
-        app:layout_constraintTop_toTopOf="@+id/homeScreen_view_quoteBackground" />
+        app:layout_constraintTop_toTopOf="@+id/homeScreen_view_quoteBackground"
+        app:layout_constraintVertical_bias="0.526" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
