@@ -59,6 +59,7 @@ public class settingsScreen extends AppCompatActivity {
         }
 
         backIcon.setOnClickListener(v -> finish());
+
         galleryLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
