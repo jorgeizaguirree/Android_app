@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -31,12 +32,13 @@ public class quotes_activity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        ImageView backIcon = findViewById(R.id.quoteScreen_backIcon);
         list = findViewById(R.id.quoteScreen_listView_list);
         App app = (App) getApplication();
         quotes = app.getQuotesList();
         MyItemAdapter adapter = new MyItemAdapter(quotes, this);
         list.setAdapter(adapter);
-
+        backIcon.setOnClickListener(v -> finish());
     }
 }
 class MyItemAdapter extends BaseAdapter {
@@ -66,11 +68,11 @@ class MyItemAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         if (view == null) {
-            view = View.inflate(context, android.R.layout.simple_list_item_1, null);
+            view = View.inflate(context, R.layout.list_item, null);
         }
         Quotes q = quotes.get(i);
-        String text = q.getQuote() + "\n" + q.getAuthor();
-        TextView quoteTextView = view.findViewById(android.R.id.text1);
+        String text = q.getQuote() + "\n\n" + q.getAuthor();
+        TextView quoteTextView = view.findViewById(R.id.quoteScreen_txt_quote);
         quoteTextView.setText(text);
         return view;
 
