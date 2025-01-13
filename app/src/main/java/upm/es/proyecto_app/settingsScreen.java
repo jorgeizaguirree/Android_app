@@ -47,7 +47,7 @@ public class settingsScreen extends AppCompatActivity {
         default_image = 1;
 
         String origin = getIntent().getStringExtra("origin");
-        if (origin != null && origin.equals("singUp")) {
+        if (origin != null && origin.equals("signUp")) {
             update.setText("Set Profile");
         }
 
