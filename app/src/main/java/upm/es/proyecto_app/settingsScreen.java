@@ -7,9 +7,11 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -30,6 +32,7 @@ public class settingsScreen extends AppCompatActivity {
     ActivityResultLauncher<Intent> cameraLauncher;
     EditText name;
     Button update, logOut;
+    TextView password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,28 +43,43 @@ public class settingsScreen extends AppCompatActivity {
         ImageView backIcon = findViewById(R.id.profileScreen_backIcon);
         name = findViewById(R.id.profileScreen_editTextText_changeName);
         update = findViewById(R.id.profileScreen_button_updateProfile);
+        logOut = findViewById(R.id.profileScreen_button_logOut);
+        password = findViewById(R.id.profileScreen_editTextTextPassword_changePassword);
 
         name.setHint(getIntent().getStringExtra("name"));
         File internalStorageDir = getFilesDir();
         File imageFile = new File(internalStorageDir, getIntent().getStringExtra("user") + ".jpg");
         File userFile = new File(internalStorageDir, getIntent().getStringExtra("user") + ".txt");
-
+        if (imageFile.exists()){
+            Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
+            userImageView.setImageBitmap(bitmap);
+        } else {
+            userImageView.setImageResource(R.drawable.ic_default_boy);
+        }
 
         backIcon.setOnClickListener(v -> finish());
+        password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(settingsScreen.this, changePasswordScreen.class);
+                intent.putExtra("user", getIntent().getStringExtra("user"));
+                startActivity(intent);
+            }
+        });
 
-        galleryLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                        imageUri = result.getData().getData();
-                        if (imageUri != null) {
-                            userImageView.setImageURI(imageUri);
-                        } else {
-                            Toast.makeText(this, "No image selected", Toast.LENGTH_SHORT).show();
+                galleryLauncher = registerForActivityResult(
+                        new ActivityResultContracts.StartActivityForResult(),
+                        result -> {
+                            if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                                imageUri = result.getData().getData();
+                                if (imageUri != null) {
+                                    userImageView.setImageURI(imageUri);
+                                } else {
+                                    Toast.makeText(this, "No image selected", Toast.LENGTH_SHORT).show();
+                                }
+                            }
                         }
-                    }
-                }
-        );
+                );
 
         cameraLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -108,7 +126,7 @@ public class settingsScreen extends AppCompatActivity {
             intent.putExtra("user", getIntent().getStringExtra("user"));
             startActivity(intent);
         });
-
+        logOut.setOnClickListener(v -> startActivity(new Intent(settingsScreen.this, welcomeScreen.class)));
         findViewById(R.id.profileScreen_image_changeIcon).setOnClickListener(v -> showIconPickerDialog());
     }
 

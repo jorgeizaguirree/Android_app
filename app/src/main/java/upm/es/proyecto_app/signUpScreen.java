@@ -49,6 +49,7 @@ public class signUpScreen extends AppCompatActivity {
         File internalStorageDir = getFilesDir();
         File myFile = new File(internalStorageDir, "db.txt");
         try  {
+            myFile.createNewFile();
             FileInputStream fis = new FileInputStream(myFile);
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
@@ -75,7 +76,7 @@ public class signUpScreen extends AppCompatActivity {
                     try {
                         user_file.createNewFile();
                         try (FileOutputStream fos = new FileOutputStream(user_file)) {
-                            fos.write(user.getText().toString().getBytes());
+                            fos.write(name.getText().toString().getBytes());
                         }
                     } catch (IOException e) {
                         Toast.makeText(signUpScreen.this, "Error creating user file", Toast.LENGTH_SHORT).show();

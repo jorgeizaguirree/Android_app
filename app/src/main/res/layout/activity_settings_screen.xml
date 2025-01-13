@@ -115,7 +115,7 @@
         android:id="@+id/profileScreen_button_logOut"
         android:layout_width="308dp"
         android:layout_height="60dp"
-        android:background="@drawable/btn_light_gray_gradient"
+        android:background="@drawable/btn_red"
         android:fontFamily="@font/montserrat_regular"
         android:paddingStart="20dp"
         android:paddingEnd="45dp"
