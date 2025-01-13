@@ -1,7 +1,5 @@
 package upm.es.proyecto_app;
 
-import java.util.Date;
-
 public class Task {
     private String name;
     private String description;
