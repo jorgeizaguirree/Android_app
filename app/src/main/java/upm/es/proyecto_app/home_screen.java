@@ -19,8 +19,6 @@
     import androidx.core.view.ViewCompat;
     import androidx.core.view.WindowInsetsCompat;
 
-    import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
     import java.io.File;
     import java.util.ArrayList;
     import java.util.List;
@@ -98,8 +96,8 @@
             ListView listView = findViewById(R.id.task_list);
             listView.setAdapter(adapter);
 
-            FloatingActionButton floatingActionButton = findViewById(R.id.floatingActionButton);
-            floatingActionButton.setOnClickListener(v -> showAddTaskDialog());
+            ImageView addTaskButton = findViewById(R.id.homeScreen_btn_addTask);
+            addTaskButton.setOnClickListener(v -> showAddTaskDialog());
 
         }
 
