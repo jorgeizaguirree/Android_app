@@ -60,7 +60,7 @@
         android:layout_height="60dp"
         android:background="@drawable/btn_red"
         android:fontFamily="@font/montserrat_regular"
-        android:paddingStart="20dp"
+        android:paddingStart="60dp"
         android:paddingEnd="45dp"
         android:text="@string/log_out"
         android:textSize="15sp"
@@ -107,7 +107,7 @@
         android:contentDescription="@string/log_out_icon"
         app:layout_constraintBottom_toBottomOf="@+id/profileScreen_button_logOut"
         app:layout_constraintEnd_toEndOf="@+id/profileScreen_button_logOut"
-        app:layout_constraintHorizontal_bias="0.63"
+        app:layout_constraintHorizontal_bias="0.36"
         app:layout_constraintStart_toStartOf="@+id/profileScreen_button_logOut"
         app:layout_constraintTop_toTopOf="@+id/profileScreen_button_logOut"
         app:srcCompat="@drawable/ic_log_out" />
