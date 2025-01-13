@@ -3,6 +3,7 @@ package upm.es.proyecto_app;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -35,6 +36,7 @@ public class logInScreen extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +55,7 @@ public class logInScreen extends AppCompatActivity {
         password = findViewById(R.id.logInScreen_txt_password);
         rememberMe = findViewById(R.id.logInScreen_checkBox);
         load = new LoadLogInDetails();
+
 
 
 
@@ -99,6 +102,7 @@ public class logInScreen extends AppCompatActivity {
         catch (IOException e){
             Toast.makeText(logInScreen.this, "Error reading database", Toast.LENGTH_SHORT).show();
         }
+        String user_txt = user.getText().toString();
 
         logInButton.setOnClickListener(view -> {
             if (user.getText().toString().isEmpty()) {
@@ -110,15 +114,8 @@ public class logInScreen extends AppCompatActivity {
             if (!user.getText().toString().isEmpty() && !password.getText().toString().isEmpty()) {
                 int result = load.findUser(user.getText().toString(), password.getText().toString());
                 if (result == CORRECT) {
-                    if (rememberMe.isChecked()){
-                        try (FileOutputStream fos = new FileOutputStream(rememberFile, true)){
-                            long time = System.currentTimeMillis();
-                            String line = user.getText().toString() + ";" + password.getText().toString() +
-                                    ";" + time + "\n";
-                            fos.write(line.getBytes());
-                        } catch (IOException e) {
-                            Toast.makeText(this, "Error remembering user", Toast.LENGTH_SHORT).show();
-                        }
+                    if (!user.getText().toString().equals(user_txt) || rememberMe.isChecked()){
+                        updateRememberMe(rememberFile, user, password);
                     }
                     String name = "name";
                     try {
@@ -166,6 +163,15 @@ public class logInScreen extends AppCompatActivity {
                 file.delete();
             }
         }
-
+    }
+    public static void updateRememberMe(File file, EditText user, EditText password){
+        try (FileOutputStream fos = new FileOutputStream(file, true)){
+            long time = System.currentTimeMillis();
+            String line = user.getText().toString() + ";" + password.getText().toString() +
+                    ";" + time + "\n";
+            fos.write(line.getBytes());
+        } catch (IOException e) {
+            Log.d("MyClass", "error reading file");
+        }
     }
 }

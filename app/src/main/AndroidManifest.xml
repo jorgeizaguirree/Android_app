@@ -2,10 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
     <queries>
+
         <!-- Permite consultar la cámara -->
         <intent>
             <action android:name="android.media.action.IMAGE_CAPTURE" />
@@ -14,12 +15,15 @@
         <!-- Permite consultar la galería -->
         <intent>
             <action android:name="android.intent.action.PICK" />
+
             <category android:name="android.intent.category.DEFAULT" />
+
             <data android:mimeType="image/*" />
         </intent>
     </queries>
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -29,41 +33,40 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Proyecto_app"
         tools:targetApi="31">
-
+        <activity
+            android:name=".quotes_activity"
+            android:exported="false" />
         <!-- LogInScreen -->
         <activity
             android:name=".logInScreen"
-            android:exported="false" />
-
-        <!-- WelcomeScreen -->
+            android:exported="false" /> <!-- WelcomeScreen -->
         <activity
             android:name=".welcomeScreen"
-            android:theme="@style/SplashTheme"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="upm.es.proyecto_app" android:host="callback"/>
-            </intent-filter>
-        </activity>
 
-        <!-- Sign Up Screen -->
+                <data
+                    android:host="callback"
+                    android:scheme="upm.es.proyecto_app" />
+            </intent-filter>
+        </activity> <!-- Sign Up Screen -->
         <activity
             android:name=".signUpScreen"
-            android:exported="false" />
-
-        <!-- Home Screen -->
+            android:exported="false" /> <!-- Home Screen -->
         <activity
             android:name=".home_screen"
-            android:exported="false" />
-
-        <!-- Settings Screen -->
+            android:exported="false" /> <!-- Settings Screen -->
         <activity android:name=".settingsScreen" />
-
     </application>
+
 </manifest>
