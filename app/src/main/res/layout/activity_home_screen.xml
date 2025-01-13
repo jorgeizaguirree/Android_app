@@ -8,6 +8,19 @@
     android:layout_height="match_parent"
     tools:context=".home_screen">
 
+    <TextView
+        android:id="@+id/homeScreen_txt_myTasks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/mont_bold"
+        android:text="@string/my_tasks"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/task_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.128"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/homeScreen_view_quoteBackground" />
+
     <ImageView
         android:id="@+id/homeScreen_image_settings"
         android:layout_width="84dp"
@@ -15,38 +28,11 @@
         android:contentDescription="@string/settings_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.96"
+        app:layout_constraintHorizontal_bias="0.966"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.06"
+        app:layout_constraintVertical_bias="0.041"
         app:srcCompat="@drawable/ic_settings" />
-
-    <ImageView
-        android:id="@+id/homeScreen_image_defaultUserIcon"
-        android:layout_width="87dp"
-        android:layout_height="97dp"
-        android:contentDescription="@string/default_user_icon"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.127"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.116"
-        app:srcCompat="@drawable/ic_default_boy" />
-
-    <TextView
-        android:id="@+id/homeScreen_txt_username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/mont_bold"
-        android:text="@string/hello_user"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/homeScreen_txt_welcomeDescription"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/homeScreen_txt_welcomeDescription"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/homeScreen_txt_welcomeDescription"
@@ -57,10 +43,10 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/homeScreen_view_quoteBackground"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.215"
+        app:layout_constraintHorizontal_bias="0.224"
         app:layout_constraintStart_toEndOf="@+id/homeScreen_image_defaultUserIcon"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.744" />
+        app:layout_constraintVertical_bias="0.731" />
 
     <View
         android:id="@+id/homeScreen_view_quoteBackground"
@@ -69,9 +55,37 @@
         android:background="@drawable/quote_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.525"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.29" />
+        app:layout_constraintVertical_bias="0.267" />
+
+    <TextView
+        android:id="@+id/homeScreen_txt_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/mont_bold"
+        android:text="@string/hello_user"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@+id/homeScreen_txt_welcomeDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.007"
+        app:layout_constraintStart_toStartOf="@+id/homeScreen_txt_welcomeDescription"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/homeScreen_image_defaultUserIcon"
+        android:layout_width="87dp"
+        android:layout_height="97dp"
+        android:contentDescription="@string/default_user_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.132"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.095"
+        app:srcCompat="@drawable/ic_default_boy" />
 
     <TextView
         android:id="@+id/homeScreen_txt_quote"
@@ -88,29 +102,17 @@
         app:layout_constraintStart_toStartOf="@+id/homeScreen_view_quoteBackground"
         app:layout_constraintTop_toTopOf="@+id/homeScreen_view_quoteBackground" />
 
-    <Button
-        android:id="@+id/homeScreen_btn_createQuote"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/create_new_quote"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.439"
-        tools:visibility="invisible" />
-
     <ListView
         android:id="@+id/task_list"
-        android:layout_width="317dp"
-        android:layout_height="308dp"
+        android:layout_width="332dp"
+        android:layout_height="420dp"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.822" />
+        app:layout_constraintVertical_bias="0.934" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
@@ -125,5 +127,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.943"
         app:srcCompat="@android:drawable/ic_menu_add" />
+
+    <TextView
+        android:id="@+id/homeScreen_txt_noQuote"
+        android:layout_width="222dp"
+        android:layout_height="42dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="@string/no_quote_txt"
+        android:textAlignment="center"
+        android:textColor="@color/gray"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/homeScreen_view_quoteBackground" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

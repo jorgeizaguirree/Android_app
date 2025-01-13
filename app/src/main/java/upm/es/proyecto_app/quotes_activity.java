@@ -68,7 +68,7 @@ class MyItemAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         if (view == null) {
-            view = View.inflate(context, R.layout.list_item, null);
+            view = View.inflate(context, R.layout.quote_list_item_style, null);
         }
         Quotes q = quotes.get(i);
         String text = q.getQuote() + "\n\n" + q.getAuthor();

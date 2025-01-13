@@ -54,7 +54,6 @@
 
             Random random = new Random();
             quoteCounter = random.nextInt(10);
-            url_btn = findViewById(R.id.homeScreen_btn_createQuote);
             quote = findViewById(R.id.homeScreen_txt_quote);
             description = findViewById(R.id.homeScreen_txt_welcomeDescription);
             welcome = findViewById(R.id.homeScreen_txt_username);
@@ -148,8 +147,6 @@
                     // Notificar al adaptador
                     ListView listView = findViewById(R.id.task_list);
                     ((TaskAdapter) listView.getAdapter()).notifyDataSetChanged();
-
-
             });
 
             builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());

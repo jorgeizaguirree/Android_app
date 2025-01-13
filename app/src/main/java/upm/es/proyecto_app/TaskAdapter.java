@@ -42,14 +42,14 @@ public class TaskAdapter extends BaseAdapter {
 
         if (view == null) {
 
-            view = view.inflate(mContext, android.R.layout.simple_list_item_1,null);
+            view = view.inflate(mContext, R.layout.task_list_item_style,null);
         }
 
         Task task = items.get(position);
 
         // Asigna los datos a las vistas del ListView
         String text = task.getName() + "\n" + task.getDescription() + "\n" + task.getDate();
-        TextView Tview = view.findViewById(android.R.id.text1);
+        TextView Tview = view.findViewById(R.id.homeScreen_txt_task);
         Tview.setText(text);
 
         return view;
