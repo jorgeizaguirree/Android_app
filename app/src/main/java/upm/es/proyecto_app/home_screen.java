@@ -102,6 +102,12 @@
             if(taskList.isEmpty()) Toast.makeText(this, "Lista Vacia",Toast.LENGTH_SHORT).show();
             TaskAdapter adapter = new TaskAdapter(this, taskList);
 
+            if (taskList.isEmpty()) {
+                noTask.setVisibility(View.VISIBLE);
+            } else {
+                noTask.setVisibility(View.GONE);
+            }
+
             ListView listView = findViewById(R.id.task_list);
             listView.setAdapter(adapter);
 
@@ -115,6 +121,7 @@
 
 
         }
+
 
 
 
@@ -132,6 +139,11 @@
                         } else if (which == 2) {
                             FWriter writer = new FWriter(new File(getFilesDir(), getIntent().getStringExtra("user") + "_tasks.txt"));
                             writer.removeTask(taskList, taskList.get(position));
+                            if (taskList.isEmpty()) {
+                                noTask.setVisibility(View.VISIBLE);
+                            } else {
+                                noTask.setVisibility(View.GONE);
+                            }
 
                             // Reload task list from file
                             taskList.clear(); // Clear the existing list
@@ -239,6 +251,8 @@
                 // Crear nueva tarea y añadirla a la lista
                 Task newTask = new Task(name, description, dateString);
                 taskList.add(newTask);
+                noTask.setVisibility(View.GONE);
+
 
                 // Escribir la nueva tarea al archivo
                 FWriter writer = new FWriter(new File(getFilesDir(), getIntent().getStringExtra("user") + "_tasks.txt"));
